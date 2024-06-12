@@ -1,0 +1,28 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+<div id="round">  Round {{ curr_round }} </div>
+{% endblock %}
+
+{% block content %}
+
+        <div class="parent">
+            <br/>
+            <p>
+               Congratulations! You have earned £{{ earnings|floatformat:2 }} and accumulated  {{ total_points }} points in total.
+                 <br/>
+                Press CONTINUE {% if subsession.round_number < Constants.num_rounds %}to start the next round{% endif %}.
+
+            </p>
+
+           <p class="text-center mt-4">
+            <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+            </p>
+        </div>
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'patience_game/css/custom.css' %}" rel="stylesheet">
+{% endblock %}

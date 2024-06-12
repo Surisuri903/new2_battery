@@ -1,0 +1,30 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Instructions
+{% endblock %}
+
+{% block content %}
+        <p class="text-center mt-4">
+            You will first practice in <b> 2 rounds</b> of this game.  <br/>
+        </p>
+        <p class="text-center mt-4">
+            Then, you will participate in <b> 10 rounds</b> of this game.
+        </p>
+        <p class="text-center mt-4">
+            Remember, once you choose one direction you cannot switch, but whatever you do in the practise trials will not count towards final payoffs.
+        </p>
+
+        <br><br><br>
+
+        <p class="text-center mt-4">
+            <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+        </p>
+
+{% endblock %}
+
+
+{% block styles %}
+    <link href="{% static 'patience_game/css/custom.css' %}" rel="stylesheet">
+{% endblock %}

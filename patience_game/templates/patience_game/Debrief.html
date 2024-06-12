@@ -1,0 +1,44 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Debrief Sheet
+{% endblock %}
+
+{% block content %}
+<img src="{% static "patience_game/img/ucl.png" %}" width="100%" style="display: block; opacity: 1; margin-right: auto; margin-left: auto">
+    <br/>
+    <p>
+        <b>Factors influencing cooperative decision making</b>
+    <p/>
+    <p>
+        This study is being run by Kathy Lau (ucjus90@ucl.ac.uk) under the supervision of Dr. Alicia Melis (a.melis@ucl.ac.uk)
+    </p>
+    <p>
+        Thank you for participating in this study. The aim of this study is to investigate how different factors, such as patience, influences people’s tendency to behave cooperatively.
+    </p>
+    <p>
+        You have earned a bonus of {{final_payoff}}
+    </p>
+    <p>
+        Please do not discuss the purpose or nature of the study with others, as they may be participating in future trials. If you have any further questions about this study, please contact Alicia Melis (a.melis@ucl.ac.uk)
+        <br/>If you do not wish to participate, please close your browser window and do not submit the HIT.
+    </p>
+
+    <br>
+    <div style="text-align: center">
+        <p>
+            Please, click the button below to complete the study.
+        </p>
+        <button type="button" class="btn btn-primary"
+                style="text-align: center; font-size: large;
+                display: inline-block; padding: 10px">
+            <a style="color: white" href="https://app.prolific.co/submissions/complete?cc=77F1BC9F">COMPLETE THE STUDY</a>
+        </button>
+    </div>
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'patience_game/css/custom.css' %}" rel="stylesheet">
+{% endblock %}

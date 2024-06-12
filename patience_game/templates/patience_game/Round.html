@@ -1,0 +1,203 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    <div id="round"> Round {{ curr_round }} </div>
+{% endblock %}
+
+{% block content %}
+        <p>
+            Press the <b> LEFT</b> arrow key to move left, and the <b>RIGHT</b> arrow key to move right. Once you choose a direction, you cannot switch.
+        </p>
+        <div class="parent">
+        <img id="instr-1" src="{% static 'patience_game/img/round.png' %}">
+        <img id="instr-2" src="{% static 'patience_game/img/boat.png' %}" style="left: {{pos}}">
+            <div id ="instr-5">{{large_payoff}}</div>
+            <div id ="instr-6">{{small_payoff}}</div>
+            <div id="gems-large"></div>
+            <div id="gems-small"></div>
+        </div>
+        <div id="submitBtns" style="display:none;">
+            {% formfield player.direction %}
+        </div>
+
+        <div id="mainFrameTwo" style="display:none;">
+            <p class="text-center mt-4">
+            <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+        </p>
+        </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/otree/js/jquery.countdown.min.js"></script>
+    <script>
+    var radio =  $('input:radio[name="direction"]');
+    var keyPresed = false;
+    var pause = false;
+    var duration = 12000;
+    var target_duration = -1;
+    var curr_duration = 0;
+    var currpos = {{starting_point}}*840;
+    var newpos = -1;
+
+    var largegem_container = document.getElementById('gems-large');
+    var smallgem_container = document.getElementById('gems-small');
+
+    function displayGems() {
+        for (var i=0; i < {{large_payoff}}; i++) {
+            var img = new Image();
+            img.setAttribute('src', '/static/patience_game/img/gem2.png');
+            img.setAttribute('class', 'instr-3');
+            largegem_container.append(img);
+        }
+
+        for (var i = 0; i < $('#gems-large img').length; i+=2) {
+
+            $($('#gems-large img')[i]).css('left', 74+(i*20) + 'px');
+            $($('#gems-large img')[i+1]).css('top', '94px');
+            $($('#gems-large img')[i+1]).css('left', 74+(i*20) + 'px');
+        }
+
+        for (var i=0; i < {{small_payoff}}; i++) {
+            var img = new Image();
+            img.setAttribute('src', '/static/patience_game/img/gem2.png');
+            img.setAttribute('class', 'instr-4');
+            smallgem_container.append(img);
+        }
+
+        for (var i = 0; i < $('#gems-small img').length; i+=2) {
+            $($('#gems-small img')[i]).css('left', 844-(i*20) + 'px');
+            $($('#gems-small img')[i+1]).css('left', 844- (i*20) + 'px');
+            $($('#gems-small img')[i+1]).css('top', '94px');
+        }
+    }
+
+    displayGems();
+
+    $(document).keydown(function(e){
+
+        if (pause == false) {
+        if (keyPresed == false){
+            if (e.which == 37) {
+                keyPresed = 37;
+                radio.filter('[value=1]').prop('checked', true);
+                moveLeft();
+            }
+            if (e.which == 39) {
+                keyPresed = 39;
+                radio.filter('[value=0]').prop('checked', true);
+                moveRight();
+             }
+        }
+        else {
+            if (keyPresed == 37 && e.which == 37) {
+                moveLeft();
+            }
+            if (keyPresed == 39 && e.which == 39) {
+                moveRight();
+            }
+        }
+        setTimeout(resume, duration);
+        }
+    });
+
+
+    function displayContinue() {
+        if (target_duration == {{small_duration}}) {
+            if ({{ curr_round }} != 3) {
+                $( ".instr-4" ).addClass("effect");
+            }
+            else {
+                $( ".instr-3" ).addClass("effect");
+            }
+        }
+        if (target_duration == {{large_duration}}) {
+            if ({{ curr_round }} != 3) {
+                $( ".instr-3" ).addClass("effect");
+            }
+            else {
+                $( ".instr-4" ).addClass("effect");
+            }
+        }
+        document.getElementById('mainFrameTwo').style.display='block';
+    }
+
+    function hide(){
+        document.getElementById('submitBtns').style.display = 'block';
+        document.getElementById('submitBtns').style.display = 'none';
+    }
+
+    function resume(){
+        pause = false;
+    }
+
+    var img = $("#instr-2");
+
+    function moveLeft() {
+        hide();
+        pause = true;
+        if ({{starting_point}} < 0.5){
+           target_duration = {{small_duration}}
+        }
+        else{
+           target_duration = {{large_duration}}
+        }
+        newpos = currpos - 70;
+
+        if (newpos >= -1) {
+
+            img.css("left", currpos.toString()+"px").animate({
+                    "left": newpos.toString()+"px"
+                }, duration);
+
+            currpos = newpos;
+            curr_duration += duration;
+
+            if(curr_duration == target_duration) {
+                setTimeout(displayContinue, duration);
+            }
+
+            console.log(newpos);
+            console.log(curr_duration)
+        }
+        }
+
+    function moveRight() {
+        hide();
+        pause = true;
+
+        if ({{starting_point}} < 0.5){
+           target_duration = {{large_duration}}
+        }
+        else{
+          target_duration = {{small_duration}}
+        }
+
+        newpos = currpos + 70;
+
+        if (newpos <= 841){
+
+            img.css("left", currpos.toString()+"px").animate({
+                    "left": newpos.toString()+"px"
+                }, duration);
+
+            currpos = newpos;
+            curr_duration += duration;
+
+            if(curr_duration == target_duration) {
+                setTimeout(displayContinue, duration);
+            }
+           }
+        }
+
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'patience_game/css/custom.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+{% endblock %}

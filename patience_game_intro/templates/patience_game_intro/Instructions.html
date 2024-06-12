@@ -1,0 +1,26 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Boat task
+{% endblock %}
+
+{% block content %}
+        <p>
+            This is your third task. <br/>
+            In this task you decide to which island to go to collect: <br/>
+            (1) a small <b>payoff</b> that is
+            closer to your boat OR (2) a large
+            <b>payoff</b> that you will have to travel farther for. Each diamond is worth 0.05 pound.
+        </p>
+        <img id="instr-1" src="{% static 'patience_game/img/boattask.png' %}"/>
+
+        <p class="text-center mt-4">
+            <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+        </p>
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'patience_game/css/custom.css' %}" rel="stylesheet">
+{% endblock %}

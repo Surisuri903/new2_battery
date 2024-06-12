@@ -1,0 +1,128 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <img src="{% static "game_results/img/warwick_header.png" %}" width="25%" style="display: block; opacity: 1">
+    <br>
+    <h5 class="text-center" style="border-top: 3px solid black; border-bottom: 3px solid black; padding: 4px">
+        <b>UNIVERSITY OF WARWICK DEBRIEF SHEET</b>
+    </h5>
+    <table class="w-75">
+        <tr>
+            <td><b>Researcher:</b></td>
+            <td class="pl-4">Stefanie Keupp</td>
+        </tr>
+        <tr>
+            <td><b>Project leader:</b></td>
+            <td class="pl-4">Elliot Ludvig</td>
+        </tr>
+        <tr>
+            <td><b>Project Title:</b></td>
+            <td class="pl-4">Cognitive foundations of human reciprocity</td>
+        </tr>
+        <tr>
+            <td><b>Participation Duration:</b></td>
+            <td class="pl-4">Up to 60 minutes per session</td>
+        </tr>
+    </table>
+
+    <table id="contact-table">
+        <thead>
+        <tr>
+            <td>Contacts</td>
+            <td>Contact Type</td>
+            <td>E-mail</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Stefanie Keupp</td>
+            <td>Researcher</td>
+            <td><a href="mailto:stefanie.keupp@warwick.ac.uk">stefanie.keupp@warwick.ac.uk</a></td>
+        </tr>
+        <tr>
+            <td>Elliot Ludvig</td>
+            <td>Project Leader</td>
+            <td><a href="mailto:E.Ludvig@warwick.ac.uk">E.Ludvig@warwick.ac.uk</a></td>
+        </tr>
+        <tr>
+            <td>Alicia Melis</td>
+            <td>Project Leader</td>
+            <td><a href="mailto:a.melis@ucl.ac.uk">a.melis@ucl.ac.uk</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        Thank you for participating in the experiment. The aim of this study is to look for relationships between
+        certain individual behaviour strategies and decision-making in cooperative contexts.
+    </p>
+    <p>
+        Previous research has shown that humans are outstanding co-operators from early in life. Different
+        underlying mechanisms and motivations to explain these cooperative tendencies have been supposed by
+        scientists. For example, we might cooperate to boost our reputation and invest in future relationships, or
+        maybe because we feel a moral obligation to help others and engage in reciprocal activities.
+    </p>
+    <p>
+        The aim of the current research is to learn more about the relationship of some more general cognitive traits
+        and decision-making strategies (such as risky choice, future planning, and patience) with the level of
+        cooperation that people exhibit.
+    </p>
+    <p>
+        In the experiment, you played tasks that will be used as either a predictor of cooperation
+        or a measure of cooperation. Your answers will help us better understand individual differences in people’s tendencies to
+        either behave cooperatively and trusting or to be selfish and sceptical in social scenarios. The so-called
+        “Dictator game” is the task that involves real consequences for a real other player in this experiment. Your
+        monetary allocation to another player was added to a response pool and was randomly allocated to another
+        player who had also played this game. You yourself will receive a bonus payment which is drawn from this pool.
+    </p>
+    <p>
+        This study aims to examine the role of different cognitive factors for human cooperation. From a broader
+        perspective, we will compare these results with parallel studies looking at the behaviour of children and
+        chimpanzees in similar tasks. These comparisons will help us to shed light on the evolution and
+        development of human cooperation.
+    </p>
+    <p>
+        Please do not discuss the purpose or nature of the study with others, as they may be participating in future
+        trials. If you have any further questions about this study, please contact the researcher named above at the
+        given email address.
+    </p>
+    <br>
+    <div style="text-align: center">
+        <p>
+            Please, click the button below to complete the study and be redirected to Prolific Academy.
+        </p>
+        <button type="button" class="btn btn-primary"
+                style="text-align: center; font-size: large;
+                display: inline-block; padding: 10px">
+            <a style="color: white" href="https://app.prolific.co/submissions/complete?cc=C19GDA1L">COMPLETE THE
+                STUDY</a>
+        </button>
+    </div>
+
+{% endblock %}
+
+{% block styles %}
+    <style>
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .page-header {
+            margin-top: 0;
+        }
+
+        #contact-table {
+            margin: 1.5rem 0;
+            width: 100%;
+        }
+
+        #contact-table thead {
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}

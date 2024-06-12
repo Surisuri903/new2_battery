@@ -1,0 +1,147 @@
+/* Page container */
+
+.otree-body {
+    background-color: #fff;
+    color: #000;
+}
+
+.page-header {
+    margin-top: 0;
+}
+
+th, td {
+   padding: 10px;
+}
+
+td {
+    min-width: 100px;
+}
+
+p {
+    font-size: 22px;
+}
+.btn {
+    padding: 1.5vh 3vh 1.5vh 3vh;
+    border-radius: 0;
+}
+
+.custom-control-label::before,
+.custom-control-label::after {
+    top: -0.2rem;
+    left: 1rem;
+    width: 1.85rem;
+    height: 1.85rem;
+}
+
+.parent {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+div.form-inline div.controls {
+    margin-left: 20px;
+}
+
+/* Text style */
+#instr-1 {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0% auto;
+}
+
+/* boat */
+#instr-2 {
+    position: absolute;
+    top: 220px;
+    width: 100px;
+    height: 45px;
+}
+
+/* left gems */
+.instr-3 {
+    position: absolute;
+    top: 68px;
+    left: 74px;
+    width: 39px;
+    height: 29px;
+}
+
+/* right gems */
+.instr-4 {
+    position: absolute;
+    top: 68px;
+    left: 844px;
+    width: 39px;
+    height: 29px;
+}
+
+.instr-3.effect {
+animation: glow 1s infinite alternate;
+}
+
+.instr-4.effect {
+animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 40px -10px white;
+    transform: scale(1,1);
+  }
+  to {
+    box-shadow: 0 0 40px 10px white;
+    transform: scale(1.2,1.2);
+  }
+}
+
+#instr-5 {
+    position: absolute;
+    top: 40px;
+    left: 35px;
+    color: white;
+}
+
+#instr-6 {
+    position: absolute;
+    top: 40px;
+    left: 840px;
+    color: white;
+}
+
+#round {
+    text-align: right;
+}
+
+#submitBtns {
+    position: absolute;
+    left: 50%;
+}
+#press-continue {
+    text-align: right;
+    position: absolute;
+    top: 90vh;
+    left: 8vh;
+}
+
+.choice {
+    cursor: pointer;
+}
+
+#contact-table {
+    margin: 1.5rem 0;
+     width: 100%;
+}
+
+#contact-table thead {
+    font-weight: bold;
+}
+
+.logo {
+    width: 100%;
+    display: block;
+    opacity: 1;
+    margin-right: auto;
+    margin-left: auto;
+}

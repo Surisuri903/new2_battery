@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Feedback Form
+{% endblock %}
+
+{% block content %}
+
+    <div class="comment-container">
+        <p>
+
+            Thank you for participating in the study. This is a pilot run and we would greatly appreciate some feedback on your experience with it.
+        </p>
+
+
+        {% for field in form %}
+
+                {{ forloop.counter }}.
+                {{ field.label }}
+                <br/>
+
+                        <input type="textarea" id="feedback_{{ forloop.counter }}" name="feedback_{{ forloop.counter }}"
+                          required="">
+                        <label for="feedback_{{ forloop.counter }}"></label>
+                <br/>
+                <br/>
+
+        {% endfor %}
+
+        <p id="press-continue">
+            Click CONTINUE to receive debriefing information.
+        </p>
+
+        <p class="text-center mt-4">
+        <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+        </p>
+
+    </div>
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'game_results/css/game_results.css' %}" rel="stylesheet">
+{% endblock %}

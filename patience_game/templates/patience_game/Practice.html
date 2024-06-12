@@ -1,0 +1,182 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    <div id="round"> Practice Round </div>
+{% endblock %}
+
+{% block content %}
+        <p>
+        {% if subsession.round_number == 1 %}
+            Press the <b> LEFT</b> arrow key to move to the left island. Once you choose a direction, you cannot switch.
+        {% elif subsession.round_number == 2 %}
+            Press the <b>RIGHT</b> arrow key to move to the right island.  Once you choose a direction, you cannot switch.
+        {% endif %}
+        </p>
+        <div class="parent">
+        <img id="instr-1" src="{% static 'patience_game/img/round.png' %}">
+        <img id="instr-2" src="{% static 'patience_game/img/boat.png' %}" style="left:430px">
+            {% if subsession.round_number == 1 %}
+            <div id ="instr-5"> 2</div>
+            <div id ="instr-6"> 0</div>
+            {% elif subsession.round_number == 2 %}
+            <div id ="instr-5"> 0</div>
+            <div id ="instr-6"> 2</div>
+            {% endif %}
+            <div id="gems-large"></div>
+            <div id="gems-small"></div>
+        </div>
+
+        <div id="mainFrameTwo" style="display:none;">
+            <p class="text-center mt-4">
+            <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+        </p>
+        </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/otree/js/jquery.countdown.min.js"></script>
+    <script>
+
+    var keyPresed = false;
+    var pause = false;
+    var duration = 9000;
+    var target_duration = 45000;
+    var curr_duration = 0;
+    var currpos = 430;
+    var newpos = -1;
+
+    var largegem_container = document.getElementById('gems-large');
+    var smallgem_container = document.getElementById('gems-small');
+
+    function displayGems(round) {
+
+        if (round == 1) {
+            for (var i=0; i < 2; i++) {
+                var img = new Image();
+                img.setAttribute('src', '/static/patience_game/img/gem2.png');
+                img.setAttribute('class', 'instr-3');
+                largegem_container.append(img);
+            }
+
+            for (var i = 0; i < $('#gems-large img').length; i+=2) {
+
+                $($('#gems-large img')[i]).css('left', 74+(i*20) + 'px');
+                $($('#gems-large img')[i+1]).css('top', '94px');
+                $($('#gems-large img')[i+1]).css('left', 74+(i*20) + 'px');
+            }
+        }
+
+        if (round == 2) {
+            for (var i=0; i < 2; i++) {
+                var img = new Image();
+                img.setAttribute('src', '/static/patience_game/img/gem2.png');
+                img.setAttribute('class', 'instr-4');
+                smallgem_container.append(img);
+            }
+
+            for (var i = 0; i < $('#gems-small img').length; i+=2) {
+                $($('#gems-small img')[i]).css('left', 844-(i*20) + 'px');
+                $($('#gems-small img')[i+1]).css('left', 844- (i*20) + 'px');
+                $($('#gems-small img')[i+1]).css('top', '94px');
+            }
+        }
+    }
+
+    displayGems({{subsession.round_number}});
+
+    $(document).keydown(function(e){
+
+        if (pause == false) {
+        if (keyPresed == false){
+            if (e.which == 37 && {{subsession.round_number}} == 1) {
+                keyPresed = 37;
+                moveLeft();
+            }
+            if (e.which == 39 && {{subsession.round_number}} == 2) {
+                keyPresed = 39;
+                moveRight();
+             }
+        }
+        else {
+            if (keyPresed == 37 && e.which == 37 && {{subsession.round_number}} == 1) {
+                moveLeft();
+            }
+            if (keyPresed == 39 && e.which == 39 && {{subsession.round_number}} == 2) {
+                moveRight();
+            }
+        }
+        setTimeout(resume, duration);
+        }
+    });
+
+
+    function displayContinue() {
+        if (target_duration == 45000) {
+            if ({{subsession.round_number}} == 1) {
+                $( ".instr-3" ).addClass("effect");
+            }
+            else if ({{subsession.round_number}} == 2) {
+                $( ".instr-4" ).addClass("effect");
+            }
+        }
+        document.getElementById('mainFrameTwo').style.display='block';
+    }
+
+    function resume(){
+        pause = false;
+    }
+
+    var img = $("#instr-2");
+
+    function moveLeft() {
+        pause = true;
+
+        newpos = currpos - 80;
+
+        if (newpos >= 0) {
+
+            img.css("left", currpos.toString()+"px").animate({
+                    "left": newpos.toString()+"px"
+                }, duration);
+
+            currpos = newpos;
+            curr_duration += duration;
+
+            if(curr_duration == target_duration) {
+                setTimeout(displayContinue, duration);
+            }
+        }
+        }
+
+    function moveRight() {
+        pause = true;
+
+        newpos = currpos + 80;
+
+        if (newpos <= 880){
+
+            img.css("left", currpos.toString()+"px").animate({
+                    "left": newpos.toString()+"px"
+                }, duration);
+
+            currpos = newpos;
+            curr_duration += duration;
+
+            if(curr_duration == target_duration) {
+                setTimeout(displayContinue, duration);
+            }
+           }
+        }
+
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'patience_game/css/custom.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+{% endblock %}

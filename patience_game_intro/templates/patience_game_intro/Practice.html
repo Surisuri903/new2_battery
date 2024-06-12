@@ -1,0 +1,155 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    <div id="round"> Practice Round</div>
+{% endblock %}
+
+{% block content %}
+        <p>
+        {% if subsession.round_number == 1 %}
+            Press the <b> LEFT</b> arrow key to move to the left island. Once you choose a direction, you cannot switch.
+        {% endif %}
+        </p>
+        <div class="parent">
+        <img id="instr-1" src="{% static 'patience_game/img/round.png' %}">
+        <img id="instr-2" src="{% static 'patience_game/img/boat.png' %}" style="left:420px">
+
+            <div id ="instr-5">2</div>
+            <div id ="instr-6">0</div>
+
+            <div id="gems-large"></div>
+            <div id="gems-small"></div>
+        </div>
+
+        <div id="mainFrameTwo" style="display:none;">
+            <p class="text-center mt-4">
+            <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+        </p>
+        </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/otree/js/jquery.countdown.min.js"></script>
+    <script>
+
+    var keyPresed = false;
+    var pause = false;
+    var duration = 12000;
+    var target_duration = 72000;
+    var curr_duration = 0;
+    var currpos = 420;
+    var newpos = -1;
+
+    var largegem_container = document.getElementById('gems-large');
+    var smallgem_container = document.getElementById('gems-small');
+
+    function displayGems(round) {
+
+
+            for (var i=0; i < 2; i++) {
+                var img = new Image();
+                img.setAttribute('src', '/static/patience_game/img/gem2.png');
+                img.setAttribute('class', 'instr-3');
+                largegem_container.append(img);
+            }
+
+            for (var i = 0; i < $('#gems-large img').length; i+=2) {
+
+                $($('#gems-large img')[i]).css('left', 74+(i*20) + 'px');
+                $($('#gems-large img')[i+1]).css('top', '94px');
+                $($('#gems-large img')[i+1]).css('left', 74+(i*20) + 'px');
+            }
+
+    }
+
+    displayGems({{subsession.round_number}});
+
+    $(document).keydown(function(e){
+
+        if (pause == false) {
+        if (keyPresed == false){
+            if (e.which == 37) {
+                keyPresed = 37;
+                moveLeft();
+            }
+
+        }
+        else {
+            if (keyPresed == 37 && e.which == 37 ) {
+                moveLeft();
+            }
+
+        }
+        setTimeout(resume, duration);
+        }
+    });
+
+
+    function displayContinue() {
+        if (target_duration == 72000) {
+
+                $( ".instr-3" ).addClass("effect");
+
+
+        }
+        document.getElementById('mainFrameTwo').style.display='block';
+    }
+
+    function resume(){
+        pause = false;
+    }
+
+    var img = $("#instr-2");
+
+    function moveLeft() {
+        pause = true;
+
+        newpos = currpos - 70;
+
+        if (newpos >= 0) {
+
+            img.css("left", currpos.toString()+"px").animate({
+                    "left": newpos.toString()+"px"
+                }, duration);
+
+            currpos = newpos;
+            curr_duration += duration;
+
+            if(curr_duration == target_duration) {
+                setTimeout(displayContinue, duration);
+            }
+        }
+        }
+
+    function moveRight() {
+        pause = true;
+
+        newpos = currpos + 70;
+
+        if (newpos <= 840){
+
+            img.css("left", currpos.toString()+"px").animate({
+                    "left": newpos.toString()+"px"
+                }, duration);
+
+            currpos = newpos;
+            curr_duration += duration;
+
+            if(curr_duration == target_duration) {
+                setTimeout(displayContinue, duration);
+            }
+           }
+        }
+
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'patience_game/css/custom.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+{% endblock %}
