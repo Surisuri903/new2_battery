@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="kirby_question">
+        <p>
+            Which option would you prefer?
+        </p>
+
+        <br><br>
+        <div class="mb-2">
+            <button class="kirby_decision_button" name="{{ q_name }}" value="False">
+                £{{ bonus_today }} today
+            </button>
+        </div>
+        <div>
+            <button class="kirby_decision_button" name="{{ q_name }}" value="True">
+                £{{ bonus_later }} in {{ num_days }} days
+            </button>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'kirby_monetary_choices/css/kirby_monetary_choices.css' %}" rel="stylesheet">
+{% endblock %}

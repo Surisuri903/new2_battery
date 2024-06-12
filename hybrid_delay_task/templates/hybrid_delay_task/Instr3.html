@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'hybrid_delay_task/css/hybrid_delay_task.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="hybrid-delay-task">
+        <br><br><br>
+        <p>
+            You will participate in <b>{{ Constants.num_rounds }} rounds</b> of this game.
+        </p>
+        <p>
+            In case this task is chosen by the bonus lottery, your bonus from this task is the amount you have collected across the two rounds.
+        </p>
+        <br><br><br>
+        <p id="press-continue">
+            Press CONTINUE to start the game.
+        </p>
+
+        {% continue_button %}
+    </div>
+{% endblock %}

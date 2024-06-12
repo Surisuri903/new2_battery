@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <p>
+            Thank you. You have finished this block of questions.
+        </p>
+        <p>
+            Click CONTINUE.
+        </p>
+    </div>
+
+    {% continue_button %}
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'kirby_monetary_choices/css/kirby_monetary_choices.css' %}" rel="stylesheet">
+{% endblock %}

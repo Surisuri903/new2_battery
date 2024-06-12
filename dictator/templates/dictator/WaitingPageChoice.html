@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href="{% static 'dictator/css/custom_waiting_page.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="otree-wait-page container">
+        <div class="card">
+            <h4 class="otree-wait-page__title card-header">
+                Please wait
+            </h4>
+            <div class="card-body">
+                <div id="_otree-server-error" class="alert alert-danger" style="display:none">
+                    An error occurred. Please check the logs or ask the administrator for help.
+                </div>
+
+                <p class="otree-wait-page__body">Waiting for the other participant to make a choice</p>
+
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

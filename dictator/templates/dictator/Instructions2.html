@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load otree customtags %}
+
+{% block styles %}
+    <link href="{% static 'dictator/css/dictator_trust.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}
+Interactive task 2
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <b>Your final payoff</b> in this game depends
+        on <b>how much you send to the other player</b>.
+    </p>
+    <br>
+    <p>
+        For example:
+    </p>
+    <p>
+        If you send £{{ half_endowment }} then the other receives £{{ tripled }}
+        and you have £{{ half_endowment }}.
+    </p>
+
+    <img class="instr-2" src="{% static 'dictator/imgs/instr_2.png' %}" width="100%" style="margin: 2rem auto 2rem auto">
+
+    <br>
+    <p>
+        You only play this game once. Click CONTINUE to play.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load otree customtags %}
+
+{% block styles %}
+    <link href="{% static 'dictator/css/dictator_trust.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        Please decide how much of the £{{ Constants.endowment|floatformat }}
+        you will send to the other player.
+    </p>
+
+    {% formfields %}
+
+    {% continue_button %}
+
+{% endblock %}

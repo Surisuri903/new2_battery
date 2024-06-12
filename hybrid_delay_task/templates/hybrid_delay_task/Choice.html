@@ -1,0 +1,68 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="hybrid-delay-task">
+        <div id="round"> Round {{ subsession.round_number }}</div>
+        <br>
+        <p>
+            Choose your preferred option by clicking on it.
+        </p>
+        <div class="two-imgs-container">
+            <div class="choice" id="small-payoff">
+                <div id="small-payoff-coins-container">
+                    {% for r in small_payoff %}
+                        <div class="coins-row">
+                            {% for c in r %}
+                                <div>
+                                    <img class="coin" src="{% static 'hybrid_delay_task/imgs/coin.png' %}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <img class="plate" src="{% static 'hybrid_delay_task/imgs/plate.png' %}">
+            </div>
+            <div class="choice" id="large-payoff">
+                <div id="large-payoff-coins-container">
+                    {% for r in Constants.coins_rows %}
+                        <div class="coins-row">
+                            {% for c in r %}
+                                <div>
+                                    <img class="coin" src="{% static 'hybrid_delay_task/imgs/coin.png' %}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <img class="plate" src="{% static 'hybrid_delay_task/imgs/plate.png' %}">
+            </div>
+        </div>
+    </div>
+    
+    {{ form.choice.as_hidden }}
+    {{ form.choice_latency.as_hidden }}
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            let loadTimestamp = new Date().getTime();
+            $('.choice').on('click', function () {
+                let t = new Date().getTime(),
+                    c = this.id === 'large-payoff' ? "True" : "False";
+                $('input[name=choice_latency]').val(t - loadTimestamp);
+                $('input[name=choice]').val(c);
+                $('#form').submit()
+            })
+        })
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'hybrid_delay_task/css/hybrid_delay_task.css' %}" rel="stylesheet">
+{% endblock %}

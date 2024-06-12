@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'hybrid_delay_task/css/hybrid_delay_task.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="hybrid-delay-task">
+        <p>
+            In this task you can choose between two options:
+        </p>
+        <br>
+        <p>
+            (1) a <u>small</u> <b>payoff</b> that goes
+            <u>immediately</u> to your bank OR (2) a
+            <u style="font-size: 3.5vh">large</u>
+            <b>payoff</b> that you will have to <u>wait for</u>.
+        </p>
+
+        {% if session.vars.small_payoff == 1 %}
+            <img id="instr-1" src="{% static 'hybrid_delay_task/imgs/instr_1.png' %}">
+        {% else %}
+            <img id="instr-1" src="{% static 'hybrid_delay_task/imgs/instr_1_small_payoff_4.png' %}">
+        {% endif %}
+
+        <p id="press-continue">
+            Press CONTINUE.
+        </p>
+
+        {% continue_button %}
+    </div>
+{% endblock %}

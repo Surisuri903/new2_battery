@@ -1,0 +1,78 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            var gender = $('#id_gender');
+            var genderOther = $('#id_gender_other').parents('.form-group');
+            var genderOtherInput =  genderOther.find('input');
+
+            $("#id_gender_2").parents('li').append(genderOther);
+            genderOtherInput.prop('disabled', true);
+
+            gender.change(function () {
+                var genderVal = $('[name=gender]:checked').val();
+                if (genderVal === 'O') {
+                    genderOtherInput.prop('disabled', false);
+                } else if (genderVal !== 'O') {
+                    genderOtherInput.prop('disabled', true);
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'consent/css/custom.css' %}" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+        .page-header {
+            margin-top: 0;
+        }
+        .otree-title {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+    DEMOGRAPHICS FORM
+{% endblock %}
+
+{% block content %}
+    <p class="text-center"><b>Cognitive foundations of reciprocity</b></p>
+
+    <p>
+        Information on this form will be stored separately from any other information collected
+        about you during this study and will allow us to provide an accurate description of the
+        sample.
+    </p>
+    <p>
+        For the following items, please select the one response that is most descriptive of you.
+    </p>
+    <br>
+
+    <div class="form-inline mb-4">{% formfield player.age %}</div>
+    <div class="mb-4">{% formfield player.age_no_say %}</div>
+    <div class="mb-4">{% formfield player.gender %}</div>
+    {% formfield player.gender_other %}
+
+{#    <br><br>#}
+{#    {% formfield player.gender %}{% formfield player.occupation %}#}
+{#    <br><div class="form-inline">{% formfield player.studies %}</div><br>#}
+{#    <div style="width: 520px;">{% formfield player.language %}</div>#}
+{#    <div class="form-inline float-right" id="other-language" style="margin-top: -5px">{% formfield player.other_language %}</div>#}
+{#    <div id="german" style="display: none">#}
+{#        {% formfield player.german %}#}
+{#    </div><br>#}
+
+    <br>
+    <p class="text-center">
+        <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+    </p>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'hybrid_delay_task/css/hybrid_delay_task.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="hybrid-delay-task">
+        <p>
+            Thank you for completing Session 2 of the study. We hope you enjoyed the tasks.
+            <br/>
+            Like yesterday, if you have passed the attention checks you will receive a notice via Prolific and an invitation to Session 3 of the study which will take place tomorrow.
+            <br/>
+            Irrespective of your performance in the attention checks, we will approve your participation fee in Session 2 as soon as possible.
+			<br/>
+			Please click <a href="https://app.prolific.co/submissions/complete?cc=C15GN9SY"> here </a> to return to Prolific in the meantime.
+        </p>
+
+    </div>
+{% endblock %}

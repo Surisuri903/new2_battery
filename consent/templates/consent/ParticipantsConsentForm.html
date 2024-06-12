@@ -1,0 +1,66 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <img src="{% static "consent/img/warwick_header.png" %}" width="35%" style="display: block; opacity: 1; margin-right: auto; margin-left: auto">
+
+    <br>
+    <h5 class="text-center mb-3"><b>CONSENT FORM</b></h5>
+    <p class="mb-2" style="color: #800080"><b>Title of Project:</b> Cognitive foundations of reciprocity</p>
+    <p style="color: #800080"><b>Name of Researcher(s):</b> Stefanie Keupp (University of Warwick & UCL),
+        Elliot Ludvig (University of Warwick), & Alicia Melis (UCL)</p>
+
+    <table>
+        <thead><tr><td></td><td></td><td><i>Please tick all boxes</i></td></tr></thead>
+        {% for field in form %}
+            <tr>
+                <td style="vertical-align: top">{{ forloop.counter }}</td>
+                <td>{{ field.label }}</td>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="id_consent_{{ forloop.counter }}" name="consent_{{ forloop.counter }}"
+                           class="custom-control-input" required="">
+                        <label class="custom-control-label" for="id_consent_{{ forloop.counter }}"></label>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <p>Please click the following button after you have ticked each box to confirm you consent to the experiment.</p>
+    <p>Please close the browser if you do not wish to continue.</p>
+
+    <p class="text-center">
+        <button class="otree-btn-next btn btn-primary">YES I AGREE</button>
+    </p>
+
+{% endblock %}
+
+{% block styles %}
+    <style>
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+        .page-header {
+            margin-top: 0;
+        }
+        th, td {
+            padding: 10px;
+        }
+        td {
+            min-width: 100px;
+        }
+        .custom-control-label::before,
+        .custom-control-label::after {
+            top: -0.2rem;
+            left: 1rem;
+            width: 1.85rem;
+            height: 1.85rem;
+        }
+    </style>
+{% endblock %}

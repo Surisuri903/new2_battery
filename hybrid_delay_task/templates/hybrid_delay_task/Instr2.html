@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'hybrid_delay_task/css/hybrid_delay_task.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="hybrid-delay-task">
+        <p>
+            If you choose the <u>small</u> option, the payoff goes
+            <u>immediately</u> to your bank.
+        </p>
+        <p>
+            If you choose the <u style="font-size: 3.5vh">large</u>
+            option, an <u>accumulation process</u>
+            starts which transfers the payoff one-by-one into your bank.
+            You can stop the process at any time to collect the payoff and proceed to the next round.
+        </p>
+        <img id="instr-2" src="{% static 'hybrid_delay_task/imgs/instr_2.png' %}">
+        <div>
+            <div style="display: inline-block">
+                <span style="color: #ff0000">IMPORTANT!</span>
+                During the accumulation process, squares like this
+            </div>
+            <div style="background-color: #E2F0D9; width: 3vh; height: 3vh; display: inline-block; margin-left: 2vh; margin-right: 2vh"></div>
+            will appear in the upper left corner and you have to click on it within {{ seconds_for_timeout }} seconds.
+            <b>If you miss a square, you lose all payoffs in this round!</b>
+        </div>
+        <br>
+        <p id="press-continue">
+            Press CONTINUE.
+        </p>
+
+        {% continue_button %}
+    </div>
+{% endblock %}

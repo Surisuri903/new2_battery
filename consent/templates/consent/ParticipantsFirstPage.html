@@ -1,0 +1,70 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<h3>Welcome!</h3>
+    <p>Thank you for your interest in our study. <br/>
+        Before you click continue, please read the following information carefully as it explains some important details of the multi-part nature of this experiment including the requirement to complete all 3 sessions in order to obtain the bonus payment. <br>
+    </p>
+    <b> Three-parts study </b> <br/>
+    <p>
+        This study consists of 3 sessions, which will take place on 3 consecutive days starting today.<br/>You will only be allowed into the next session if you have completed the previous session.
+    </p>
+    <p>
+        We will open the subsequent sessions of the study at specific time windows in Prolific. <br/>Outside of these time windows, the studies are not available.
+    </p>
+    <p>
+       Please, make sure that you can also participate in the next two sessions, tomorrow and the day after. Please note, if you miss the respective time window, you won’t be able to participate at another time.
+        <ul>
+            <li>Session 2: Tomorrow (8.00 - 18.00 GMT)</li>
+            <li>Session 3: Day after tomorrow, (8.00 - 18.00 GMT)</li>
+        </ul>
+    </p>
+    <p>
+        IMPORTANT: <br/>
+        Participants will be excluded from subsequent sessions if they do not pass attention checks. We have interspersed catch rounds and comprehension questions that will allow us to filter out inattentive or disengaged participants. These checks are easy to pass if you complete the task attentively.
+    </p>
+    <p>
+        Only participants who pass the attention checks will be invited to the next session, and only participants who finish all three sessions will receive the bonus payments. Participants who don’t pass the attention checks will be paid the participation fee of the current session but will not be allowed to the next session and will not receive a bonus.
+    </p>
+    <p>
+        <b>Bonus payments</b> <br/><br/>
+        You can earn bonus payments in most tasks. Bonus amounts will be dependent on luck and/or the decisions you and other participants make. Further details will be explained prior to each task.
+        <br/><br/>
+        After completing all 3 sessions, a lottery will determine one task from each session, and you will get the bonus payments from those 3 tasks.
+        <br/><br/>
+        IMPORTANT: to obtain any bonus at all, you must complete all 3 sessions.
+    </p>
+    <p>
+        By clicking Continue, you confirm that you have read and agree to these conditions.
+    </p>
+
+    <p class="text-center mt-4">
+        <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+    </p>
+
+{% endblock %}
+
+{% block styles %}
+    <style>
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .page-header {
+            margin-top: 0;
+        }
+
+        table {
+            margin-bottom: 1rem;
+        }
+
+        td {
+            vertical-align: top;
+        }
+    </style>
+{% endblock %}

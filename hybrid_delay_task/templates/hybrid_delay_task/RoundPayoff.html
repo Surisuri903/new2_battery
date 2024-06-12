@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'hybrid_delay_task/css/hybrid_delay_task.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="hybrid-delay-task">
+        <div id="round"> Round {{ subsession.round_number }}</div>
+
+        {% if player.is_timeout %}
+            <p>
+                You didn’t click on the square in time and collect no payoff in this round.
+            </p>
+        {% elif player.choice == True %}
+            <p>
+                You accumulated {{ player.num_coins }} coins in this round.
+            </p>
+        {% elif player.choice == False %}
+            <p>
+                You chose the small option and {{ earnings }} have been added to your bank.
+            </p>
+        {% endif %}
+
+        <div id="empty-pig" class="center">
+            <img src="{% static 'hybrid_delay_task/imgs/pig_empty.png' %}">
+            {% for p in coins_in_pig_pos %}
+                <div class="coin-in-pig" style="top: {{ p.0 }}%; left: {{ p.1 }}%">
+                    <img class="coin" src="{% static 'hybrid_delay_task/imgs/coin.png' %}">
+                </div>
+            {% endfor %}
+        </div>
+
+        <p id="press-continue">
+            Press CONTINUE {% if subsession.round_number < Constants.num_rounds %}to start the next round{% endif %}.
+        </p>
+
+        {% continue_button %}
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+Questionnaire 1
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        In this block of questions we are interested which of two monetary choice options you prefer.
+    </p>
+    <p>
+        The block consists of {{ Constants.num_questions }} questions.
+    </p>
+    <p>
+        Please indicate for each question which reward you would prefer:
+        the smaller reward today or the larger reward in a specified number of days.
+    </p>
+    <p>
+        You can indicate your choice by clicking on the respective button.
+    </p>
+
+    <div class="mt-4 mb-2">
+        <div class="kirby_decision_button" style="cursor: default">
+            small reward today
+        </div>
+    </div>
+    <div class="mb-4">
+        <div class="kirby_decision_button" style="cursor: default">
+            large reward in [...] days
+        </div>
+    </div>
+
+    <p>
+        Press CONTINUE to begin.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'kirby_monetary_choices/css/kirby_monetary_choices.css' %}" rel="stylesheet">
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href="{% static 'hybrid_delay_task/css/hybrid_delay_task.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/otree/js/jquery.countdown.min.js"></script>
+    <script src="{% static 'hybrid_delay_task/js/hybrid_delay_task.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="hybrid-delay-task">
+        <div id="round"> Round {{ subsession.round_number }}</div>
+
+        <div id="rect"></div>
+
+        <div class="two-imgs-container container-for-transfer">
+            <div id="large-payoff">
+                <div id="large-payoff-coins-container">
+                    {% for r in Constants.coins_rows %}
+                        <div class="coins-row">
+                            {% for c in r %}
+                                <div class="coin-on-plate">
+                                    <img class="coin{% if forloop.last and coin_in_transfer %} coin-in-transfer{% endif %}"
+                                         src="{% static 'hybrid_delay_task/imgs/coin.png' %}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <img class="plate" src="{% static 'hybrid_delay_task/imgs/plate.png' %}">
+            </div>
+            <div id="empty-pig">
+                <img src="{% static 'hybrid_delay_task/imgs/pig_empty.png' %}">
+                {% for p in coins_in_pig_pos %}
+                    <div class="coin-in-pig" style="top: {{ p.0 }}%; left: {{ p.1 }}%">
+                        {% if forloop.counter <= player.num_coins %}
+                            <img class="coin" src="{% static 'hybrid_delay_task/imgs/coin.png' %}">
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <p id="stop-button-container">
+            <button type="button" id="stop-button">
+                <img src="{% static 'hybrid_delay_task/imgs/stop_button.png' %}">
+            </button>
+        </p>
+
+    </div>
+
+    {% for field in form %}
+        {{ field.as_hidden }}
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree customtags %}
+
+{% block styles %}
+    <link href="{% static 'dictator/css/dictator_trust.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}
+Interactive task 2
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You will now play another interactive game with a different participant.
+    </p>
+    <p>
+        You will not interact with each other again afterwards.
+    </p>
+    <br><br><br>
+    <p>
+        Press CONTINUE.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}

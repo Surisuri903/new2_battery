@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree customtags %}
+
+{% block styles %}
+    <link href="{% static 'dictator/css/dictator_trust.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        You sent {{ player.sent }} to the other player.
+    </p>
+    <p>
+        Your payoff is {{ player.payoff }}.
+    </p>
+    <p>
+        The other’s payoff is {{ other_payoff }}. In case this task is chosen by the bonus lottery, your payoff is the amount you will receive as bonus for this task.
+    </p>
+    <br><br><br>
+    <p>
+        Click CONTINUE to proceed to the next game.
+    </p>
+
+    {% continue_button %}
+{% endblock %}
