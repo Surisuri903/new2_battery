@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <p class="text-center">Sorry, you took too long and earned no points in this game.</p>
+    {% if not is_last_node %}
+        <p class="text-center">Press CONTINUE when you are ready to play the next game.</p>
+    {% else %}
+        <div class="mt-5">
+            {% if is_practice %}
+                <p>
+                    Great, you have finished the practice games.
+                </p>
+                <p>
+                    There will be 3 real games during which you will be paired with another player anonymously.
+                    The other player is a different player in each game.
+                </p>
+                <p>
+                    The games work like the practice games you have just played.
+                </p>
+                <p>
+                    One of the games will be randomly selected and you will receive your earnings
+                    of that game as bonus payment.
+                </p>
+                <p>
+                    Enjoy!
+                </p>
+            {% else %}
+                <p class="text-center">
+                    Great, you have finished the test games.
+                </p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% continue_button %}
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="bart-container-instructions container" >
+        <ul>
+            <li>
+                For each balloon, you can click the button "<b>PUMP</b>" to increase the size of
+                the balloon. You will accumulate {{ Constants.points_per_pump }} point
+                for each pump in a temporary bank ("Current balloon"). A point is worth a pence.<br>
+                Maximum number of pumps is {{ Constants.max_num_pumps }} for each balloon.
+            </li>
+            <li>
+                You can stop pumping the balloon by clicking the button "<b>STOP</b>".
+                Accumulated points from your temporary bank goes to your permanent
+                bank labelled "Total points" in the blue box. Then the next balloon will appear.
+            </li>
+            <li>
+                The points you earned on the previous balloon are shown in the blue box as "Last balloon."
+            </li>
+            <li>
+                There will be 20 balloons in total. In case this task is chosen by the bonus lottery, your bonus from this task is the sum of accumulated Total points.
+                Press CONTINUE to start the game.
+            </li>
+        </ul>
+        <img class="bart-instructions-img" src="{% static "bart/img/bart_pump_stop_commands.png" %}" style="width: 70%">
+
+        <p style="text-align: right; margin-top: 3vh">
+            <button class="btn btn-outline-warning" style="font-size: 3vmin; background-color: dimgray">CONTINUE</button>
+        </p>
+    </div>
+
+{% endblock %}
+
+{% block styles  %}
+    <link href="{% static 'bart/css/bart.css' %}" rel="stylesheet">
+{% endblock %}

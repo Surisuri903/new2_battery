@@ -1,0 +1,116 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <table class="table-nodes">
+        <thead>
+            <tr><td></td><td class="node-a">Your<br>Payoff:</td><td class="node-b">Other's<br>Payoff:</td><td></td></tr>
+        </thead>
+        {% for node in nodes_to_display %}
+            {% if node == 'NA' %}
+                <tr>
+                    <td>
+                        <img src="{% static 'global/imgs/node_other.png' %}" width="40%" class="mx-auto" style="display: block; visibility: hidden">
+                    </td>
+                    <td></td><td></td><td></td>
+                </tr>
+            {% elif forloop.counter == 3 %}
+                <tr class="curr_node" style="height: 140px">
+                    <td>
+                        {% if forloop.counter|divisibleby:2 %}
+                            {% if is_bot_turn %}
+                                <img src="{% static 'global/imgs/node_you.png' %}" width="40%" class="mx-auto" style="display: block">
+                            {% else %}
+                                <img src="{% static 'global/imgs/node_other.png' %}" width="40%" class="mx-auto" style="display: block">
+                            {% endif %}
+                        {% elif forloop.counter < num_nodes %}
+                            {% if is_bot_turn %}
+                                <img src="{% static 'global/imgs/node_other.png' %}" width="40%" class="mx-auto" style="display: block">
+                            {% else %}
+                                <img src="{% static 'global/imgs/node_you.png' %}" width="40%" class="mx-auto" style="display: block">
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td class="node-a node-a-payoff">{{ node.0 }}</td>
+                    <td class="node-b node-b-payoff">{{ node.1 }}</td>
+                    <td class="go-stop pl-5 pr-3 explanation">
+                        {% if is_bot_turn %}
+                            It’s the other player’s turn
+                        {% else %}
+                            <div class="container-fluid mb-5">
+                                <div class="row justify-content-center">
+                                    <div class="col"><button class="button-go" name="go" value="True">Go</button></div>
+                                    <div class="col"><button class="button-stop" name="go" value="False">Stop</button></div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% elif display_last_node and forloop.last %}
+                <tr>
+                    <td></td>
+                    <td class="node-a node-a-payoff">{{ node.0 }}</td>
+                    <td class="node-b node-b-payoff">{{ node.1 }}</td>
+                    <td class="go-stop pl-5"></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>
+                        {% if forloop.counter|divisibleby:2 %}
+                            {% if is_bot_turn %}
+                                <img src="{% static 'global/imgs/node_you.png' %}" width="40%" class="mx-auto" style="display: block">
+                            {% else %}
+                                <img src="{% static 'global/imgs/node_other.png' %}" width="40%" class="mx-auto" style="display: block">
+                            {% endif %}
+                        {% elif forloop.counter < num_nodes %}
+                            {% if is_bot_turn %}
+                                <img src="{% static 'global/imgs/node_other.png' %}" width="40%" class="mx-auto" style="display: block">
+                            {% else %}
+                                <img src="{% static 'global/imgs/node_you.png' %}" width="40%" class="mx-auto" style="display: block">
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td class="node-a node-a-payoff">{{ node.0 }}</td>
+                    <td class="node-b node-b-payoff">{{ node.1 }}</td>
+                    <td class="go-stop pl-5"></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            var isBotTurn = {{ is_bot_turn|json }},
+                isStopbyBot = {{ is_stop_by_bot|json }};
+            if (isBotTurn) {
+                var msg = 'Other played Go...';
+                if (isStopbyBot) {msg = 'Other played Stop...'}
+                var currentDate = new Date();
+                var remainingTimeoutSeconds = {{ view.remaining_timeout_seconds|json }};
+                var milliseconds = Math.floor(remainingTimeoutSeconds * 1000);
+                $('.otree-timer__time-left').countdown(currentDate.valueOf() + milliseconds)
+                    .on('update.countdown', function (event) {
+                        if (event.offset.totalSeconds <= 2) {
+                            $('.explanation').html(msg)
+                        }
+                    })
+                }
+        });
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'global/css/centipede.css' %}" rel="stylesheet">
+    <style>
+        .page-header {
+            padding-top: 0;
+        }
+    </style>
+{% endblock %}

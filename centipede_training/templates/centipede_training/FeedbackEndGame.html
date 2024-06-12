@@ -1,0 +1,46 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="text-center">
+        {% if not player.go %}
+            <p>You chose STOP and earned <span class="ego-payoff">{{ payoff_node.0 }}</span> points in this game.
+                The other player earned <span class="alter-payoff">{{ payoff_node.1 }} points</span>.</p>
+        {% elif player.stop_by_bot %}
+            <p>The other player chose STOP and earned {{ payoff_node.1 }} points.
+                You earned <span class="ego-payoff">{{ payoff_node.0 }} points</span> in this game.</p>
+        {% else %}
+            <p>You both played the game until the end. You earned
+                <span class="ego-payoff">{{ payoff_node.0 }} points</span> and
+                the other player earned <span class="alter-payoff">{{ payoff_node.1 }} points</span>.</p>
+        {% endif %}
+    </div>
+
+    {% if subsession.round_number < Constants.num_rounds and is_practice %}
+        <div class="text-center">
+            <p>Press CONTINUE to begin the next game.</p>
+        </div>
+    {% elif is_last_node and not player.go or subsession.round_number == Constants.num_rounds %}
+        <div class="mt-5">
+            <p class="text-center">Great, you have finished the {% if is_practice %}practice{% else %}test{% endif %} games.</p>
+            {% if is_practice %}
+                <p>
+                    There will be 1 real game during which you will be paired with another player anonymously.
+                </p>
+                <p>
+                    The game will work like the practice games you have just played.
+                </p>
+                <p>
+                    Enjoy!
+                </p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% continue_button %}
+
+{% endblock %}

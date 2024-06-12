@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Balloons task
+{% endblock %}
+
+{% block content %}
+
+    <div class="bart-container-instructions container">
+        <p>
+            This is the "Balloon" task.
+        </p>
+        <ul>
+            <li>
+                It’s very simple: You can earn points by pumping up a balloon.
+                The bigger the balloon, the more points you get.
+            </li>
+            <li>
+                However, the balloon may pop at some point. In this case, you earn no points for this round.
+            </li>
+        </ul>
+        <img class="bart-instructions-img" src="{% static "bart/img/bart_instructions.png" %}">
+        <ul>
+            <li>
+                With every click you decide if you want to pump up the balloon or stop.
+                If you stop, you get the points saved to your bank.
+            </li>
+        </ul>
+
+        <p style="text-align: right; margin-top: 3vh">
+            <button class="btn btn-outline-warning" style="font-size: 3vmin; background-color: dimgray">CONTINUE</button>
+        </p>
+
+    </div>
+
+{% endblock %}
+
+{% block styles  %}
+    <link href="{% static 'bart/css/bart.css' %}" rel="stylesheet">
+{% endblock %}
+

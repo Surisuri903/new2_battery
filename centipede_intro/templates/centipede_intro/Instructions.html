@@ -1,0 +1,96 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+Interactive task 3
+{% endblock %}
+
+{% block content %}
+    <p>
+        This is your first task.
+    </p>
+
+    <ul>
+        <li>In this game, you take alternating turns with another player.</li>
+        <li>In each round, you or the other player decide if you want to continue to play or to stop.</li>
+        <li>If you choose GO it’s the other player’s turn.</li>
+        <li>If you choose STOP, each player receives the amount of payment indicated at the current node.</li>
+    </ul>
+    <p>Here is an example:</p>
+
+    <table class="table-nodes">
+        <thead>
+            <tr><td></td><td class="node-a">Your<br>Payoff:</td><td class="node-b">Other's<br>Payoff:</td><td></td></tr>
+        </thead>
+        {% for node in nodes %}
+            <tr>
+                <td>
+                    {% if forloop.counter|divisibleby:2 %}
+                        <img src="{% static 'global/imgs/node_other.png' %}" width="40%" class="mx-auto" style="display: block">
+                    {% elif forloop.counter < Constants.num_nodes %}
+                        <img src="{% static 'global/imgs/node_you.png' %}" width="40%" class="mx-auto" style="display: block">
+                    {% endif %}
+                </td>
+                <td class="node-a node-a-payoff">{{ node.0 }}</td>
+                <td class="node-b node-b-payoff">{{ node.1 }}</td>
+                <td class="explanation">
+                    {% if forloop.counter == 1 %}
+                        If you choose stop, you get {{ node.0 }} and<br>
+                        the other gets {{ node.1 }} payoff.<br>
+                        Game ends here.
+                    {% elif forloop.counter == 2 %}
+                        If other player chooses stop, you get {{ node.0 }} and<br>
+                        the other gets {{ node.1 }} payoff.<br>
+                        Game ends here.
+                    {% elif forloop.counter == 3 %}
+                        And so on ...
+                    {% elif forloop.counter == Constants.num_nodes %}
+                        If both players play until<br>
+                        the end, you get {{ node.0 }} and<br>
+                        the other gets {{ node.1 }} payoff.
+                    {% else %}
+                        ...
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <p>
+        For all games, payoff points correspond to £0.1.<br>
+        For example:
+    </p>
+    <ul>
+        <li>Payoff 4 corresponds to £0.40</li>
+        <li>Payoff 16 corresponds to £1.60</li>
+        <li>Payoff 20 corresponds to £2.00</li>
+        <li>and so on...</li>
+    </ul>
+    <p>You can first practice how it works by playing with a computer.</p>
+    <p>There will be three practice rounds with games of differing lengths.</p>
+    <p>
+        You always have <b>{{ Constants.max_seconds_per_decision }} seconds</b> to make your choice.
+        If you are too slow, the game ends and you earn zero points.<br>
+        Press the "Go" or "Stop" button to indicate your choice.
+    </p>
+    <div class="container-fluid mb-4">
+        <div class="row justify-content-center">
+            <div class="col-2 text-center"><button type="button" class="button-go" style="cursor: default; margin: 0; padding: 0"  tabindex="-1">Go</button></div>
+            <div class="col-2 text-center"><button type="button" class="button-stop" style="cursor: default; margin: 0; padding: 0"  tabindex="-1">Stop</button></div>
+        </div>
+    </div>
+    <p>
+        You will receive feedback on earned points during the practice rounds for
+        illustration purpose, but these practice points don't contribute to your final bonus payment.
+    </p>
+    <p>
+        When you are ready to start the practice rounds, press CONTINUE.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'global/css/centipede.css' %}" rel="stylesheet">
+{% endblock %}

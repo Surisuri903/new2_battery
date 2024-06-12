@@ -1,0 +1,62 @@
+table.table-nodes {
+    margin: 30px auto 30px auto;
+    width: 100%;
+}
+td.node-a, td.node-b {
+    font-size: x-large;
+    text-align: center
+}
+td.node-a {
+    padding-right: 50px;
+}
+td.node-b {
+    padding-left: 50px;
+}
+.node-a-payoff {
+    font-weight: bold;
+    color: darkorange;
+    vertical-align: top;
+    padding-top: 1rem;
+}
+.ego-payoff {
+    color: darkorange;
+}
+.node-b-payoff {
+    font-weight: bold;
+    color: royalblue;
+    vertical-align: top;
+    padding-top: 1rem;
+}
+.alter-payoff {
+    color: royalblue;
+}
+td.explanation {
+    vertical-align: top;
+    padding-top: 1.3rem;
+}
+td.go-stop {
+    padding-left: 50px;
+    width: 300px;
+}
+.button-go, .button-stop {
+    min-width: 80px;
+    height: 40px;
+    border: 3px solid #696969;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    outline: none!important;
+}
+.button-go {
+    background-color: #5aa914
+}
+.button-stop {
+    background-color: #ff8c00
+}
+tr.curr_node {
+    background-color: #e0e0dd;
+    height: 140px
+}
+.otree-timer {
+    display: none;
+}

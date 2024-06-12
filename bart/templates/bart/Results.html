@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="bart-container">
+        <div class="bart-container-results">
+            <img src="{% static "bart/img/bart_balloons.png" %}" style="height: 90%; margin-left: 5%">
+            <div>
+                <p class="text-center">
+                    Congratulations.
+                    You have finished the task. In case this task is chosen by the bonus lottery, your bonus from this task will be {{ bart_payoff }} bonus.
+                </p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 3vh">
+            <button class="btn btn-outline-warning" style="font-size: 3vmin; background-color: dimgray">CONTINUE</button>
+        </p>
+    </div>
+{% endblock %}
+
+{% block styles  %}
+    <link href="{% static 'bart/css/bart.css' %}" rel="stylesheet">
+{% endblock %}

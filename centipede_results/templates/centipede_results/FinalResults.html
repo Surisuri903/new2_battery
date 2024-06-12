@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <p>
+            Game {{ player.game_for_payment }} was drawn, which means you receive
+            a bonus payment of {{ payoff }}.
+        </p>
+        <p>
+            Thank you again for your participation. Hopefully you enjoyed this experiment.
+        </p>
+    </div>
+	
+	<p>
+            Please, click the button below to complete the study and be redirected to Prolific Academy.
+        </p>
+        <button type="button" class="btn btn-primary"
+                style="text-align: center; font-size: large;
+                display: inline-block; padding: 10px">
+            <a style="color: white" href="https://app.prolific.co/submissions/complete?cc=7113CF97">COMPLETE THE
+                STUDY</a>
+{% endblock %}
+
+

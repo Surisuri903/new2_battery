@@ -1,0 +1,56 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+    <ul>
+        <li>This is the
+            {% if game_num == 1 %}first{% elif game_num == 2 %}second{% else %}third{% endif %}
+            {% if is_practice %}practice{% else %}test{% endif %} game. It has {{ num_nodes }} nodes.</li>
+        {% if is_practice %}
+            <li>
+                During the game, you will see up to {{ Constants.num_nodes_to_display }} nodes at once. The game moves “upwards”
+                with a grey horizontal line indicating whose turn it is.
+            </li>
+        {% endif %}
+        <li>When you are ready to start, press CONTINUE.</li>
+    </ul>
+
+    <table class="table-nodes">
+        <thead>
+            <tr><td></td><td class="node-a">Your<br>Payoff:</td><td class="node-b">Other's<br>Payoff:</td><td></td></tr>
+        </thead>
+        {% for node_a, node_b in nodes %}
+            <tr>
+                <td>
+                    {% if forloop.counter|divisibleby:2 %}
+                        <img src="{% static 'global/imgs/node_other.png' %}" width="40%" class="mx-auto" style="display: block">
+                    {% elif forloop.counter < num_nodes %}
+                        <img src="{% static 'global/imgs/node_you.png' %}" width="40%" class="mx-auto" style="display: block">
+                    {% endif %}
+                </td>
+                <td class="node-a node-a-payoff">{{ node_a }}</td>
+                <td class="node-b node-b-payoff">{{ node_b }}</td>
+                <td>
+                    <div class="container-fluid mb-5" style="visibility: hidden">
+                        <div class="row justify-content-center">
+                            <div class="col"><button class="button-go" name="go" value="True">Go</button></div>
+                            <div class="col"><button class="button-stop" name="go" value="False">Stop</button></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% continue_button %}
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'global/css/centipede.css' %}" rel="stylesheet">
+{% endblock %}

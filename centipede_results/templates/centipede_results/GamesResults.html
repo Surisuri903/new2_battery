@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+     <p class="text-center">
+         Congratulations. You have finished the task. <br/>
+         In case this task is chosen by the bonus lottery, your bonus from this task will be: £{{ payoff }}
+     </p>
+
+    <p>
+        Click CONTINUE.
+    </p>
+     <p>
+        <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+    </p>
+
+{% endblock %}
+

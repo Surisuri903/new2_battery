@@ -1,0 +1,58 @@
+body {
+    background-color: #3b3838ff;
+    color: #ffffff;
+    font-size: x-large;
+}
+.page-header {
+    padding-top: 20px;
+}
+.risk_from_description_question {
+    text-align: center;
+}
+.risk_from_description_decision_button {
+    background-color: #203864ff;
+    border: 2px solid #2f528fff;
+    color: #FFFFFF;
+    min-width: 250px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 100%;
+    margin: 40px auto 20px auto;
+    text-align: center;
+    cursor: pointer;
+}
+.risk_from_description_decision_button:focus {
+    outline: none;
+}
+.text-yellow {
+    color: #FFD966;
+}
+.text-round {
+    font-size: smaller;
+    text-align: right;
+}
+
+/* Comment fields style */
+.comment-container {
+    background-color: #ffffff;
+    margin-bottom: 5vh;
+    padding: 2vmin;
+}
+.comment-container .form-group {
+    margin-bottom: 2vh;
+}
+.comment-container textarea.form-control {
+    padding: 1vh 2vh;
+    border: 0.2vmin solid #ced4da;
+    border-radius: 0.5vmin;
+    max-width: 100%;
+}
+.comment-container textarea {
+    height: 24vh;
+    width: 100%;
+}
+.comment-container .col-form-label {
+    color: #000000;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}

@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        Welcome to the second session of our study! We are happy you are back.
+    </p>
+    <p>
+        Today, there will be three tasks with a total duration of approximately 60 minutes, depending on your pace and decisions.<br/>
+        You can earn bonus payments in all 3 tasks. For more details about how the bonuses are determined please read the task-specific instructions carefully. After completing today's and tomorrow's sessions, and if you pass the attention checks, a lottery will determine one task from each session, and you will get the bonus payments from those 3 tasks. 
+        <br/>
+        The time window to begin this part will close at 6 PM GMT today. You have time until 7:15PM GMT to finish this experiment
+    </p>
+    <p>
+        When you are ready to start the practice rounds, press CONTINUE.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'global/css/centipede.css' %}" rel="stylesheet">
+{% endblock %}

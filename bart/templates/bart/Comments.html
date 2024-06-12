@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles  %}
+    <link href="{% static 'bart/css/bart.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="bart-container-instructions container">
+        <div class="comment-container">
+            {% formfields %}
+        </div>
+
+        <p id="press-continue">
+            Click CONTINUE to receive the debriefing information and to be re-directed to Prolific.
+        </p>
+
+        <p style="text-align: right; margin-top: 3vh">
+            <button class="btn btn-outline-warning" style="font-size: 3vmin; background-color: dimgray">CONTINUE</button>
+        </p>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles  %}
+    <link href="{% static 'bart/css/bart.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'bart/js/jquery.imgexplode.js' %}"></script>
+    <script src="{% static 'bart/js/bart.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="bart-container-task">
+        <img class="bart-pump-img" src="{% static "bart/img/pump.png" %}">
+        <img class="bart-balloon-img" src="{% static "bart/img/bart_balloon.png" %}">
+        <button class="bart-pump-button" type="button">PUMP</button>
+        <button class="bart-stop-button" type="button">STOP</button>
+        <div class="bart-feedback-task">
+            <div>Last balloon: <span class="bart-last-balloon">{{ points_last_balloon }}</span></div>
+            <div>Current balloon: <span class="bart-current-balloon">0</span></div>
+            <div>Total points: <span class="bart-total-points">{{ total_points }}</span></div>
+        </div>
+    </div>
+
+    {% for field in form %}
+        {{ field.as_hidden }}
+    {% endfor %}
+
+{% endblock %}
