@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+Doors task
+{% endblock %}
+
+{% block content %}
+    <div class="risk-from-experience-task-container">
+        <p>
+            In this task, you will see {{ Constants.num_pairs }} pairs of doors. Each pair will be
+            presented {{ Constants.num_rep_per_pair }} times in a row.
+        </p>
+        <p>
+            By clicking on a door, you can collect points. Try to earn as many points as possible!
+        </p>
+        <p>
+            In case this task is chosen by the bonus lottery, your payoff is the sum of all points you collected.
+        </p>
+        <p>
+            A payoff point corresponds to 1 pence.
+        </p>
+
+        {% continue_button %}
+    </div>
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'risk_from_experience_task/css/risk_from_experience_task.css' %}" rel="stylesheet">
+{% endblock %}

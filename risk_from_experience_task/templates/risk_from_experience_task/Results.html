@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="risk-from-experience-task-container">
+        <p>
+            This was the last round. Thank you for your work! We hope you enjoyed exploring what is hidden behind our doors.
+        </p>
+        <p>
+            You collected {{ player.payoff }} in total. In case this task is chosen by the bonus lottery, this is the amount you will receive as bonus for this task.
+        </p>
+        <br>
+        <p>
+            Click CONTINUE to proceed to the next task.
+        </p>
+
+        {% continue_button %}
+
+    </div>
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'risk_from_experience_task/css/risk_from_experience_task.css' %}" rel="stylesheet">
+{% endblock %}

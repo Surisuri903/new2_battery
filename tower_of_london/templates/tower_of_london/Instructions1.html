@@ -1,0 +1,91 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+<link href="{% static 'css/tower_of_london.css' %}" rel="stylesheet">
+    <style>
+        .page-header {
+            margin-top: 0;
+        }
+        img {
+            padding: 5px
+        }
+        .arrow {
+            width: 100%;
+            height: 150px;
+            border: 6px solid;
+            border-radius: 50%;
+            position: relative;
+            margin-left: 100%;
+        }
+        .arrow:before {
+            content: "";
+            display: block;
+            width: 65%;
+            height: 150%;
+            background: #000;
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            right: -6px;
+            margin: auto;
+        }
+        .arrow:after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid #fff;
+            position: absolute;
+            top: -12px;
+            right: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center"">
+            <div class="col-1">
+                <div class="arrow"></div>
+            </div>
+            <div class="col-3">
+                <div class="p-3 mx-auto mt-2 mb-0" style="display: flex;
+                flex-wrap: wrap; justify-content: space-around; align-items: center">
+                    <div style="padding: 5px">Goal state</div>
+                    <img src="{% static 'imgs/tol_goal_state_ex.png' %}" style="border: 5px solid orange; width: 100%">
+                </div>
+                <div class="p-3 mx-auto mt-0 mb-5" style="display: flex;
+                    flex-wrap: wrap; justify-content: space-around; align-items: center">
+                    <div style="padding: 5px">Start state</div>
+                    <img src="{% static 'imgs/tol_start_state_ex.png' %}" style="width: 100%">
+                </div>
+            </div>
+            <div class="col-8">
+                <p>
+                    Your task is to transform the start configuration into the end configuration with a
+                    <b><u>minimum number of moves</u></b>.
+                </p>
+                <p>
+                    The bonus for solving the minimum number of moves is {{ Constants.bonus_per_trial }}
+                    pence per configuration.
+                    Any additional moves make the bonus for that round smaller by
+                    {{ Constants.loss_per_extra_move }} pence.
+                </p>
+                <p>
+                    So, 1 extra move beyond the minimum yields {{ bonus_with_one_extra_move }} pence,
+                    2 extra moves yields {{ bonus_with_two_extra_moves }} pence, and 10 or more extra moves
+                    yields no bonus for that round.
+                </p>
+                <p>The maximum bonus amount is {{ max_bonus }}, the minimum is {{ min_bonus }}. In case this task is chosen by the bonus lottery, your bonus from this task will be the amount you have collected across the 24 rounds. </p>
+            </div>
+        </div>
+    </div>
+    {% continue_button %}
+{% endblock %}
+
+

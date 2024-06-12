@@ -1,0 +1,37 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<link href="{% static 'css/tower_of_london.css' %}" rel="stylesheet">
+    <p>
+        Task navigation:<br>
+        Move the balls between the rods on the lower panel to match the configuration display above.
+    </p>
+
+    <ol>
+        <li>
+            Click on the ball you want to move. A white halo will appear and mark the ball as selected.
+        </li>
+        <li>
+            Then click on the rod where you want the ball to move to. The ball will automatically appear on
+            your selected target location.
+        </li>
+    </ol>
+    <p>
+        You can de-select a ball by clicking on it a second time. However, this will be counted as a move.
+    </p>
+    <p>
+        Therefore, it is important that you plan your moves before you start the execution.
+    </p>
+    <p>
+        If you are ready to begin with the first example configuration, press CONTINUE.<br>
+        The 1-minute timer will start immediately.
+    </p>
+
+    {% continue_button %}
+{% endblock %}
+
+

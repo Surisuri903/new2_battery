@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'global/css/risk_from_description.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Choice <span class="text-yellow">{{ player.decision_to_pay }}</span> was selected.
+    </p>
+    <br>
+    <p>
+        Your payoff in this task is
+        <span class="text-yellow">{{ participant.vars.risk_from_description_payoff|c }}</span>
+    </p>
+<p>
+        Thank you again for your participation. In case this task is chosen by the bonus lottery, this is the amount you will receive as bonus for this task.
+    </p>
+    <p>
+         Click CONTINUE to proceed to the next task.
+    </p>
+    {% continue_button %}
+
+{% endblock %}
+

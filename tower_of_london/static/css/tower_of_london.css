@@ -1,0 +1,144 @@
+/************************
+****** Page Layout ******
+************************/
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-size: 3vmin;
+    margin: 0;
+}
+
+.page-header {
+    padding-top: 20px;
+}
+
+#rule-reminder {
+    margin-top: -70px;
+    text-align: center;
+    color: orange;
+    font-size: 2.5vmin;
+}
+
+#label_executed_moves {
+    margin-top: 1.5vmin;
+    text-align: center;
+    font-size: 3vmin;
+}
+
+/****************************
+****** Tower of London ******
+****************************/
+
+#tower-container {
+    position: relative;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-end;
+    margin: 0 auto 0;
+    width: 69vmin;
+    height: 29vmin;
+}
+
+.rod {
+    position: absolute;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    flex-flow: column wrap;
+    flex-direction: column-reverse;
+    margin: 0;
+    padding: 0;
+    width: 9vmin;
+    height: 27.5vmin;
+    opacity: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slot {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    border-radius: 50%;
+    padding: 0;
+    width: 9vmin;
+    height: 9vmin;
+    opacity: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ball {
+    z-index: 2;
+    top: 0; left:0; /* of the container */
+    width:100%; /* of the container */
+    height:100%; /* of the container */
+    position: relative;
+    border-radius: 50%;
+}
+
+.selected {
+    z-index: 3;
+    box-shadow: 0 0 0 1vmin #fff;
+}
+
+.R {
+    background: radial-gradient(circle at 4vmin 4vmin, #ff0000, #000);
+}
+
+.B {
+    background: radial-gradient(circle at 4vmin 4vmin, #5cabff, #000);
+}
+
+.Y {
+    background: radial-gradient(circle at 4vmin 4vmin, #fc0, #000);
+}
+
+.tower_of_london-container {
+    background: #000;
+    padding: 1rem;
+    width: 80%;
+    margin: auto;
+}
+
+.tower {
+    position: absolute;
+    border-radius: 1vmin 1vmin 0 0;
+    width: 4vmin;
+    background: linear-gradient(to right, #d7b889, #b27315, #966f33);
+}
+.a {
+    left: 14.25vmin;
+    height: 29vmin;
+}
+.b {
+    left: 32.5vmin;
+    height: 20vmin;
+}
+.c {
+    left: 50.75vmin;
+    height: 11vmin;
+}
+
+.a ~ .rod {
+    left: 11.5vmin;
+}
+
+.b ~ .rod {
+    left: 30vmin;
+    height: 18.5vmin;
+}
+
+.c ~ .rod {
+    left: 48.25vmin;
+    height: 9.5vmin;
+}
+
+.bottom {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    border-radius: 1vmin;
+    width: 69vmin;
+    height: 5vmin;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.3), transparent),
+    linear-gradient(#b27315, #966f33 13%, #faddb0 14.5%, #faddb0 27.5%, #966f33 29%, #966f33 42%, #faddb0 43.5%, #d7b889 56.5%, #966f33 58%, #966f33 71%, #d7b889 72.5%, #d7b889 85.5%, #966f33 87%, #b27315);
+}

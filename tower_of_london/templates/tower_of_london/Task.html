@@ -1,0 +1,222 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href="{% static 'css/tower_of_london.css' %}" rel="stylesheet">
+    <style>
+        .page-header {
+            padding-top: 20px;
+        }
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function disableF5(e) {if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); }
+
+        $(document).ready(function(){
+            $(document).on("keydown", disableF5);
+        });
+    </script>
+    <script>
+        $(function () {
+            // Set start state for current configuration
+            let start = {{start|json}},
+                goal = {{ goal|json }},
+                rodsTask = $('#tower-task .rod'),
+                rodsGoal = $('#tower-goal .rod'),
+                RBY = {
+                    "R": "<div class=\"ball R\"></div>",
+                    "B": "<div class=\"ball B\"></div>",
+                    "Y": "<div class=\"ball Y\"></div>"
+                },
+                ifFirstMove = true,
+                inputConfigSolved = $('input[name=config_solved]'),
+                states = [],
+                movesData = [],
+                currMove = [],
+                inputMoves = $('input[name=moves]'),
+                inputStates = $('input[name=states_path]'),
+                inputTimeStartTask = $('input[name=time_start_task]'),
+                inputTimeFirstMove = $('input[name=time_first_move]'),
+                inputTimeLastMove = $('input[name=time_last_move]');
+
+            var setFirstMoveTime = function (event) {
+                if(ifFirstMove){
+                    ifFirstMove = false;
+                    var d = new Date();
+                    inputTimeFirstMove.val(d.getTime());
+                }
+            };
+
+            var setLastMoveTime = function (event) {
+                if(!ifFirstMove){
+                    var d = new Date();
+                    inputTimeLastMove.val(d.getTime());
+                }
+            };
+
+            var setStart = function(start, tower) {
+                var i;
+                for(i=1; i <= tower.length; i++) {
+                    var j;
+                    for(j=1; j <= start[i].length; j++) {
+                        var ballColor = RBY[start[i][j-1]];
+                        tower.eq(i-1).find('.slot:nth-child('+j+')').prepend(ballColor);
+                    }
+                }
+                var allBalls = rodsTask.find('.ball');
+                allBalls.each(function () {
+                    if($(this).parent().next(':has(.ball)').length === 0){
+                        $(this).css({'cursor': 'pointer'})
+                    }
+                })
+            };
+
+            var setGoal = function(goal, tower) {
+                setStart(goal, tower)
+            };
+
+            var getCurrentState = function (tower) {
+                setLastMoveTime();
+                var currState = {};
+                var colors = [];
+                var i;
+                for(i=1; i <= tower.length; i++) {
+                    var balls = tower.eq(i-1).find('.ball');
+                    balls.each(function() {
+                        colors.push($(this).attr('class').split(' ')[1]);
+                    });
+                    currState[i] = colors;
+                    colors = [];
+                }
+                states.push(currState);
+                return currState
+            };
+
+            var isGoalReached = function(goal, tower) {
+                var currState = getCurrentState(tower);
+                if(JSON.stringify(currState) === JSON.stringify(goal)) {
+                    inputConfigSolved.val('True');
+                    inputMoves.val(JSON.stringify(movesData));
+                    inputStates.val(JSON.stringify(states));
+                    setTimeout(function () {$('#form').submit()}, 500);
+                }
+            };
+
+            setStart(start, rodsTask);
+            setGoal(goal, rodsGoal);
+
+            // Display tower with current configuration already set up
+            setTimeout(function () {
+                $('#tower-task').css('visibility', 'visible');
+                $('#tower-goal').css('visibility', 'visible');
+                inputConfigSolved.val('False');
+                var d = new Date();
+                inputTimeStartTask.val(d.getTime());
+            }, 0);
+
+            var rods = $('#tower-task .rod');
+            var balls = $('#tower-task .ball');
+            balls.on('click', function () {
+                var currRod = $(this).parents('.rod');
+                var currSlot = $(this).parents('.slot');
+                var isTopMostBall = $(this).parent().next(':has(.ball)').length === 0;
+                var d = new Date();
+                if ($('.selected').length === 0 && isTopMostBall) {
+                    currMove.push(currSlot.attr('id'));
+                    currMove.push(d.getTime());
+                    $(this).addClass('selected');
+                    currRod.siblings().css({"cursor": "pointer"});
+                    setFirstMoveTime()
+                } else if ($(this).hasClass('selected')) {
+                    currMove.push(currSlot.attr('id'));
+                    currMove.push(d.getTime());
+                    movesData.push(currMove);
+                    currMove = [];
+                    $(this).removeClass('selected');
+                    currRod.siblings().css({"cursor": "default"});
+                    getCurrentState(rodsTask)
+                }
+            });
+
+            rods.on('click', function () {
+                var selectedBall = $('.selected'),
+                    emptySlots = $(this).find('.slot:not(:has(*))');
+                if(emptySlots.length !== 0 &&                   // rod with empty slot(s)
+                    $(this).find('.selected').length === 0 &&   // rod with no selected ball
+                    selectedBall.length !== 0) {                // a ball is selected
+                    emptySlots.first().append(selectedBall);    // append ball to lowest empty slot
+                    var d = new Date();
+                    currMove.push(emptySlots.first().attr('id'));
+                    currMove.push(d.getTime());
+                    movesData.push(currMove);
+                    currMove = [];
+                    selectedBall.removeClass('selected');
+                    rods.css({"cursor": "default"});
+                    isGoalReached(goal, rodsTask);
+                    var allBalls = rods.find('.ball');
+                    allBalls.each(function () {
+                        if($(this).parent().next(':has(.ball)').length === 0){
+                            $(this).css({'cursor': 'pointer'})
+                        } else {
+                            $(this).css({'cursor': 'default'})
+                        }
+                    })
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    {% if page_refreshed %}
+
+        <p>
+            Please, avoid refreshing the page of your browser.
+        </p>
+        <p>
+            If for any reason you refresh the page of your browser, you will skip the current trial.
+        </p>
+        <p>
+            Please, wait until the time allowed to complete the trial is over. The next trial will start automatically.
+        </p>
+
+    {% else %}
+
+        <div class="container-fluid">
+            <div class="row align-items-center no-gutters">
+                <div class="col-2"><div style="color: orange">Goal state</div></div>
+                <div class="col-8 pb-3">
+                    <div id="tower-goal" style="visibility: hidden">
+                        {% include "tower_of_london/Tower.html" %}
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+            <div class="row align-items-center mt-4">
+                <div class="col-2"><div style="color: orange">Start state</div></div>
+                <div class="col-8">
+                    <div id="tower-task" style="visibility: hidden">
+                        {% include "tower_of_london/Tower.html" %}
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+        <p style="float: left; color: orange; margin-top: 20px"><b>Minimum moves<br>required: {{ min_moves }}</b></p>
+
+    {% endif %}
+
+    {% for field in form %}
+        {{ field.as_hidden }}
+    {% endfor %}
+
+{% endblock %}

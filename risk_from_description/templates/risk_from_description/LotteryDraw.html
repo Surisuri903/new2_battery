@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'global/css/risk_from_description.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        Great, thank you very much!
+    </p>
+    <br>
+    <p>
+        One of your choices will now be drawn randomly and the underlying lottery will be played.
+    </p>
+    <br>
+    <p>
+        In case this task is chosen by the bonus lottery, your bonus from this task will be the outcome of the selected choice.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <style>
+        body {text-align: center}
+        .page-header {margin-top: 6vmin;}
+    </style>
+{% endblock %}
+
+{% block title %}
+Towers task
+{% endblock %}
+
+{% block content %}
+
+    <p>Click continue to start the next task of this session</p><br>
+
+    <p>This game will last approximately 15-20 minutes.</p><br>
+
+    {% continue_button %}
+{% endblock %}
+
+

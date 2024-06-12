@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'css/tower_of_london.css' %}" rel="stylesheet">
+    <style>
+        body {text-align: center}
+        .page-header {margin-top: 6vmin;}
+    </style>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <p>Great, you have reached the end of the task. This was the last configuration.</p>
+    <p>Click continue to learn how many bonus you have accumulated.</p>
+
+    {% continue_button %}
+{% endblock %}
+
+

@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'global/css/risk_from_description.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        There will be <span class="text-yellow">{{ Constants.num_rounds }} choices</span>.
+    </p>
+    <br>
+    <p>
+        Afterwards, one of your {{ Constants.num_rounds }} choices will be drawn
+        randomly and the lottery will be played.
+        In case this task is chosen by the bonus lottery, your bonus from this task will be the outcome of the selected choice.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}

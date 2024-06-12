@@ -1,0 +1,50 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'global/css/risk_from_description.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    Questionnaire 2
+{% endblock %}
+
+{% block content %}
+    <p>
+        In this block of questions we would like to know which of two monetary choice options you prefer.
+    </p>
+    <p>
+        Here is an <span class="text-yellow">example</span>:
+    </p>
+
+    <div class="container-fluid">
+        <div class="row">
+            {% for option in Constants.example %}
+                <div class="col">
+                    <div class="row">
+                        <div class="col risk_from_description_decision_button" style="cursor: default; max-width:75%">
+                            <div class="mb-4">{% widthratio option.0.1 1 100 %} % chance to win {{ option.0.0 }}</div>
+                            <div>{% widthratio option.1.1 1 100 %} % chance to win {{ option.1.0 }}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col ml-5" style="font-size: large">
+                            This option is lottery between
+                            <ul>
+                                <li>winning {{ option.0.0 }} with a {% widthratio option.0.1 1 100 %} % chance or</li>
+                                <li>winning {{ option.1.0 }} with a {% widthratio option.1.1 1 100 %} % chance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <p>
+        Press CONTINUE.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}

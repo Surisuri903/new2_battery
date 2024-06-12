@@ -1,0 +1,125 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="risk-from-experience-task-container">
+        <p class="pair-counter">
+            Pair {{ pair_number }} of {{ Constants.num_pairs }}
+        </p>
+        <p class="text-center">
+            Please click on the door you want to open.
+        </p>
+        <div class="door-container left-item">
+            <div id="{{ doors.0.type }}" class="doors">
+                <img src="{% static doors.0.url %}">
+                <div class="values-container">
+                    <div class="values-text"></div><div class="values">{{ doors.0.value }}</div> points
+                </div>
+            </div>
+        </div>
+        <div class="door-container right-item">
+            <div id="{{ doors.1.type }}" class="doors">
+                <img src="{% static doors.1.url %}">
+                <div class="values-container">
+                    <div class="values-text"></div> <div class="values">{{ doors.1.value }}</div> points
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let pageLoadTimestamp;
+
+        $(function () {
+
+            let secondsSelectedDoorDisplayed = {{ Constants.seconds_selected_door_displayed|json }},
+                secondsBeforeDisplayValuesAfterSelection = {{ Constants.seconds_before_display_values_after_selection|json }},
+                secondsValuesDisplayed = {{ Constants.seconds_values_displayed|json }},
+                secondsInterTrialInterval = {{ Constants.seconds_inter_trial_interval|json }},
+                doors = $('.doors'),
+                valTexts = $('.values-text');
+
+            pageLoadTimestamp = new Date().getTime();
+
+            doors.on('click', function () {
+                let doors = $('.doors');
+
+                if (!doors.hasClass('door-selected')){
+                    $(this).addClass('door-selected');
+
+                    let i = doors.index($(this)),
+                        choiceTimestamp = new Date().getTime(),
+                        choice = this.id,
+                        payoff = parseInt($('.values').eq(i).html()),
+                        latency = choiceTimestamp - pageLoadTimestamp;
+
+                    setTimeout(function () {
+                        doors.find('img').hide();
+                        setTimeout(function () {
+                            valTexts.eq(i).html('You win');
+                            valTexts.eq(i - 1).html('You could have won');
+                            $('.values-container').show();
+                            setTimeout(function () {
+                                doors.hide();
+
+                                setTimeout(function () {
+                                    let data = {
+                                        'type': 'response',
+                                        'door_left': doors.eq(0).attr('id'),
+                                        'door_right': doors.eq(1).attr('id'),
+                                        'choice': choice,
+                                        'pair_payoffs': payoff,
+                                        'latency': latency
+                                    };
+                                    liveSend(data)
+                                }, 1000 * secondsInterTrialInterval)
+
+                            }, 1000 * secondsValuesDisplayed);
+                        }, 1000 * secondsBeforeDisplayValuesAfterSelection);
+                    }, 1000 * secondsSelectedDoorDisplayed);
+                }
+            })
+        });
+
+        function liveRecv(data) {
+            pageLoadTimestamp = new Date().getTime();
+            console.log('received a message!', data);
+            let t = data['type'];
+            if (t === 'submit') {
+                $('#form').submit()
+            }
+            if (t === 'task') {
+                let doors = $('.doors'),
+                    imgs = doors.find('img'),
+                    values = $('.values'),
+                    task = data['task'],
+                    i;
+
+                for (i = 0; i < doors.length; i++) {
+                    let t = task[i];
+                    doors.eq(i).attr('id', t['type']);
+                    imgs.eq(i).attr("src", t['url']);
+                    values.eq(i).html(t['value']);
+                }
+
+                doors.removeClass('door-selected');
+                $('.values-container').hide();
+                doors.show();
+                imgs.show();
+            }
+        }
+
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'risk_from_experience_task/css/risk_from_experience_task.css' %}" rel="stylesheet">
+{% endblock %}
+

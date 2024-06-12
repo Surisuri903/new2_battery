@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <link href="{% static 'global/css/risk_from_description.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="comment-container">
+        {% formfields %}
+    </div>
+
+    <p id="press-continue">
+        Click CONTINUE to to proceed to the next task.
+    </p>
+    {% continue_button %}
+
+{% endblock %}

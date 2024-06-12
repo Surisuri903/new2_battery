@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block styles %}
+    <style>
+        p {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<link href="{% static 'css/tower_of_london.css' %}" rel="stylesheet">
+    {% if player.config_solved %}
+        <p>
+            You have solved the task in <span style="color: orange">{{ player.num_moves }}</span> moves and
+            have earned additional <span style="color: orange">{{ player.payoff }}</span>.
+        </p>
+    {% else %}
+        <p>
+            Time is up. You have not solved the task within the time limit of {{ Constants.time_limit }}
+            minute and have earned no extra £.
+        </p>
+    {% endif %}
+
+    <br><br>
+    <p>
+        When you are ready to work on the next configuration, click <span style="color: orange">CONTINUE</span>.
+    </p>
+
+    <p style="margin-top: 60px">
+        <button class="btn btn-outline-warning" style="font-size: 3vmin">CONTINUE</button>
+    </p>
+{% endblock %}
+
+

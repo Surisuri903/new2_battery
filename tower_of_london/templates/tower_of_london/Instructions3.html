@@ -1,0 +1,37 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<link href="{% static 'css/tower_of_london.css' %}" rel="stylesheet">
+    <p>
+        You can try the task with some simple configurations. There will be 2 training configurations,
+        which you can repeat as often as you need.
+    </p>
+    <p>
+        Once you proceed to the test, you will see  a series of 24 unique configurations,
+        which cannot be repeated. The configurations will increase in difficulty.
+    </p>
+    <p>
+        Time limit for each configuration is {{ Constants.time_limit }} minute.
+    </p>
+    <div style="color: orange">
+        <p>
+            Your task is to transform the configurations with the minimum number of moves.<br>
+            Please, plan ahead before you start movement execution.
+        </p>
+        <div><b>Rules</b>:</div>
+        <ol>
+            <li>Only 1 ball can be moved at a time.</li>
+            <li>Balls cannot be placed beside the rods.</li>
+            <li>Only the topmost ball can be moved in case several balls are stacked on one rod.</li>
+        </ol>
+    </div>
+    
+
+    {% continue_button %}
+{% endblock %}
+
+

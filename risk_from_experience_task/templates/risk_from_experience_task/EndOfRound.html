@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="risk-from-experience-task-container">
+        <br><br>
+        <p>
+            Great, you finished this round!
+        </p>
+        <br>
+        <p>
+            You can take a short break if you want. Once you are ready for the next round, press CONTINUE.
+        </p>
+
+        {% continue_button %}
+    </div>
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'risk_from_experience_task/css/risk_from_experience_task.css' %}" rel="stylesheet">
+{% endblock %}

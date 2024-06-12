@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Welcome, thank you for participating in our experiment! This is a pilot run to test different parts of a bigger
+        test battery.
+    </p>
+    <p>
+        Today you will play one of the tasks.
+    </p>
+    <p>
+        During some tasks you can earn bonus payments. In case you get to play one of them, you will receive the bonus
+        as explained in the task-specific instructions on the next slides.
+    </p>
+    <p>
+        Press CONTINUE.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="risk-from-experience-task-container">
+        <div class="comment-container">
+            {% formfields %}
+        </div>
+
+        <p id="press-continue">
+            Click CONTINUE to receive the debriefing information and to be re-directed to Prolific.
+        </p>
+
+        {% continue_button %}
+
+    </div>
+{% endblock %}
+
+{% block styles  %}
+    <link href="{% static 'risk_from_experience_task/css/risk_from_experience_task.css' %}" rel="stylesheet">
+{% endblock %}

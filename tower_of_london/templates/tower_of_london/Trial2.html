@@ -1,0 +1,281 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href="{% static 'css/tower_of_london.css' %}" rel="stylesheet">
+    <style>
+        .page-header {
+            padding-top: 0;
+        }
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            // Set start state for current configuration
+            let start = {{start|json}},
+                goal = {{ goal|json }},
+                minMoves = {{ min_moves|json }},
+                bonus = {{ Constants.bonus_per_trial|json }},
+                loss_per_extra_move = {{ Constants.loss_per_extra_move|json }},
+                towerTask = $('#tower-task'),
+                rodsTask = $('#tower-task .rod'),
+                rodsGoal = $('#tower-goal .rod'),
+                RBY = {
+                    "R": "<div class=\"ball R\"></div>",
+                    "B": "<div class=\"ball B\"></div>",
+                    "Y": "<div class=\"ball Y\"></div>"
+                },
+                ifFirstMove = true,
+                inputConfigSolved = false,
+                moves = [],
+                numMoves = 0,
+                additionalBonus = null,
+                spanNumMoves = $('span.num_moves'),
+                inputTimeFirstMove = $('input[name=time_first_move]'),
+                inputTimeLastMove = $('input[name=time_last_move]');
+
+            var setFirstMoveTime = function (event) {
+                if(ifFirstMove){
+                    ifFirstMove = false;
+                    var d = new Date();
+                    inputTimeFirstMove.val(d.getTime());
+                }
+            };
+
+            var setLastMoveTime = function (event) {
+                if(!ifFirstMove){
+                    var d = new Date();
+                    inputTimeLastMove.val(d.getTime());
+                }
+            };
+
+            var resetMoves = function () {
+                numMoves = 0;
+                spanNumMoves.html(numMoves);
+            };
+
+            var setStart = function(start, tower) {
+                resetMoves();
+                var i;
+                for(i=1; i <= tower.length; i++) {
+                    var j;
+                    for(j=1; j <= start[i].length; j++) {
+                        var ballColor = RBY[start[i][j-1]];
+                        var rod = tower.eq(i-1).find('.slot:nth-child('+j+')');
+                        rod.prepend(ballColor)
+                    }
+                }
+                var allBalls = rodsTask.find('.ball');
+                allBalls.each(function () {
+                    if($(this).parent().next(':has(.ball)').length === 0){
+                        $(this).css({'cursor': 'pointer'})
+                    }
+                })
+            };
+
+            var setGoal = function(goal, tower) {
+                setStart(goal, tower)
+            };
+
+            var getCurrentState = function (tower) {
+                setLastMoveTime();
+                var currState = {};
+                var colors = [];
+                var i;
+                for(i=1; i <= tower.length; i++) {
+                    var balls = tower.eq(i-1).find('.ball');
+                    balls.each(function() {
+                        colors.push($(this).attr('class').split(' ')[1]);
+                    });
+                    currState[i] = colors;
+                    colors = [];
+                }
+                moves.push(currState);
+                return currState
+            };
+
+            var isGoalReached = function(goal, tower) {
+                var currState = getCurrentState(tower);
+                if(JSON.stringify(currState) === JSON.stringify(goal)) {
+                    setTimeout(function () {
+                        $('#task').css('display', 'none');
+                        $('#feedback').css('display', 'block');
+                        $('#message-solved').css('display', 'block');
+                        $('#message-no-solved').css('display', 'none');
+                        additionalBonus = (bonus - (loss_per_extra_move * (numMoves - minMoves)))/100;
+                        if(additionalBonus < 0){additionalBonus = 0}
+                        $('span.practice_payoff').html(additionalBonus.toFixed(2))
+                    }, 500);
+                    inputConfigSolved = true;
+
+                    inputMoves.val(JSON.stringify(moves));
+                }
+            };
+
+            var detachBalls = function () {
+                $('.ball').remove()
+            };
+
+            var displayTask = function () {
+                inputConfigSolved = false;
+                $('#task').css('display', 'block');
+                $('#feedback').css('display', 'none');
+                detachBalls();
+                setGoal(goal, rodsGoal);
+                setStart(start, rodsTask);
+
+                displayFeedback();
+            };
+
+            var displayFeedback = function(){
+                setTimeout(function () {
+                    $('#task').css('display', 'none');
+                    $('#feedback').css('display', 'block');
+                    if(inputConfigSolved) {
+                        $('#message-solved').css('display', 'block');
+                        $('#message-no-solved').css('display', 'none');
+                    } else {
+                        $('#message-solved').css('display', 'none');
+                        $('#message-no-solved').css('display', 'block');
+                    }
+                }, 1000 * 60);
+            };
+
+            displayTask();
+
+            // Display tower with current configuration already set up
+            setTimeout(function () {
+                $('#tower-task').css('visibility', 'visible');
+                $('#tower-goal').css('visibility', 'visible');
+                inputConfigSolved.val('False')
+            }, 0);
+
+            $('#try-again-button').on("click", function () {
+                displayTask()
+            });
+
+            towerTask.on('click', '.ball', function () {
+                var currRod = $(this).parents('.rod');
+                var isTopMostBall = $(this).parent().next(':has(.ball)').length === 0;
+                if ($('.selected').length === 0 && isTopMostBall) {
+                    $(this).addClass('selected');
+                    currRod.siblings().css({"cursor": "pointer"});
+                    setFirstMoveTime()
+                } else if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    ++numMoves;
+                    spanNumMoves.html(numMoves);
+                    currRod.siblings().css({"cursor": "default"});
+                    getCurrentState(rodsTask)
+                }
+            });
+            towerTask.on('click', '.rod', function () {
+                var selectedBall = $('.selected'),
+                    emptySlots = $(this).find('.slot:not(:has(*))');
+                if(emptySlots.length !== 0 &&                   // rod with empty slot(s)
+                    $(this).find('.selected').length === 0) {   // rod with no selected ball
+                    emptySlots.first().append(selectedBall);    // append ball to lowest empty slot
+                    selectedBall.removeClass('selected');
+                    rodsTask.css({"cursor": "default"});
+                    if (selectedBall.length > 0) {
+                        ++numMoves;
+                        spanNumMoves.html(numMoves);
+                    }
+                    isGoalReached(goal, rodsTask);
+                    var allBalls = rods.find('.ball');
+                    allBalls.each(function () {
+                        if($(this).parent().next(':has(.ball)').length === 0){
+                            $(this).css({'cursor': 'pointer'})
+                        } else {
+                            $(this).css({'cursor': 'default'})
+                        }
+                    })
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    {% comment %}
+    <div id="rule-reminder">
+        <div>Rule reminder:</div>
+            <ol>
+                <li>Only 1 ball can be moved at a time.</li>
+                <li>Balls cannot be placed beside the rods.</li>
+                <li>Only the topmost ball can be moved in case several balls are stacked on one rod.</li>
+            </ol>
+        <p>
+            Solve the task with the minimum number of moves.<br>
+            You have 1 minute to complete the task.
+        </p>
+    </div>
+    {% endcomment %}
+
+    <div id="task">
+        <div>Practice round</div><br>
+
+        <div class="container-fluid">
+            <div class="row align-items-center no-gutters">
+                <div class="col-2"><div style="color: orange">Goal state</div></div>
+                <div class="col-8 pb-3">
+                    <div id="tower-goal" style="visibility: hidden">
+                        {% include "tower_of_london/Tower.html" %}
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-2"><div style="color: orange">Goal state</div></div>
+                <div class="col-8">
+                    <div id="tower-task" style="visibility: hidden">
+                        {% include "tower_of_london/Tower.html" %}
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+        <p style="float: left; color: orange; margin-top: 40px"><b>Minimum moves<br>required: {{ min_moves }}</b></p>
+        <p style="float: right; margin-top: 40px"><b>Number of<br>executed moves: <span class="num_moves">0</span></b></p>
+    </div>
+
+    <div id="feedback" style="text-align: center">
+        <p id="message-solved">
+            You have solved the task in <span class="num_moves" style="color: orange"></span> moves and
+            have earned additional £<span class="practice_payoff" style="color: orange"></span>.
+        </p>
+        <p id="message-no-solved">
+            Time is up. You have not solved the task within the time limit of {{ Constants.time_limit }}
+            minute and have earned no extra £.
+        </p>
+        <br><br>
+        <p>
+            If you would like to try again, click TRY AGAIN.<br>
+            If you would like to begin with the <u>test</u>, click CONTINUE.
+        </p>
+        <p>The 1-minute timer will start immediately.</p>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <p style="margin-top: 40px">
+                        <button id="try-again-button" type="button" class="btn btn-outline-warning" style="font-size: 3vmin">TRY AGAIN</button>
+                    </p>
+                </div>
+                <div class="col">
+                    <p style="margin-top: 40px">
+                        <button class="btn btn-outline-warning" style="font-size: 3vmin">CONTINUE</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

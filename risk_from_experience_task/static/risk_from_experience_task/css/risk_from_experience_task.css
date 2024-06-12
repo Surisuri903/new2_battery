@@ -1,0 +1,104 @@
+#disconnected-alert {
+    display: none;
+}
+body {
+    background-color: #222A35;
+    color: #ffffff;
+    font-size: 2vmax;
+}
+p {
+    margin-bottom: 2vh;
+}
+.otree-body {
+    max-width: 100vw;
+    height: 100vh;
+}
+.container {
+    padding-left: 0;
+    padding-right: 0;
+}
+.page-header {
+    margin: 0;
+    padding-top: 0
+}
+.pair-counter {
+    text-align: right;
+    margin-right: 2vw;
+    font-size: 1.2vmax;
+}
+.risk-from-experience-task-container {
+    height: 93vh;
+    margin-right: 5vw;
+    margin-left: 5vw;
+    padding-top: 5vh;
+    position: relative;
+}
+.door-container {
+    position: absolute;
+    height: 50vmin;
+    width: 50%;
+    top: 60%;
+    transform: translate(0, -50%);
+}
+.door-container.left-item {
+}
+.door-container.right-item {
+    transform: translate(100%, -50%);
+}
+.doors {
+    height: 100%;
+    width: 18vw;
+    margin: auto;
+    background-color: #D6DCE5;
+    cursor: pointer;
+    padding-top: 4%;
+}
+.doors .values-container {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18vw;
+    text-align: center;
+    color: #000000;
+    font-size: xx-large;
+}
+.values-text, .values {
+    max-width: 100%;
+}
+.doors.door-selected {
+    outline: 2vh solid #70AD47;
+}
+img {
+    display: block;
+    height: 92%;
+    width: 92%;
+    margin: auto;
+}
+
+/* Comment fields style */
+.comment-container {
+    max-height: 50vh;
+    background-color: #ffffff;
+    margin-bottom: 5vh;
+    padding: 2vh 2vw 2vh 2vw;
+}
+.comment-container .form-group {
+    margin-bottom: 2vh;
+}
+.comment-container textarea.form-control {
+    padding: 1vh 2vh;
+    border: 0.2vmin solid #ced4da;
+    border-radius: 0.5vmin;
+    max-width: 100%;
+}
+.comment-container textarea {
+    height: 24vh;
+    width: 100%;
+}
+.comment-container .col-form-label {
+    color: #000000;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
