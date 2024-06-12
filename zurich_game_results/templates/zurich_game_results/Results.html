@@ -1,0 +1,106 @@
+{% extends "global/Page.html" %}
+{% load otree static customtags %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        Well done! You collected space treasure worth {{ bonus }}.
+    </p>
+    <br>
+
+    <div class="form-group required">
+        <label class="col-form-label" for="id_q_yr_planet_0">
+            Which spaceship travelled to the yellow-red planet most of the time? (select by clicking)
+        </label>
+        <div class="controls  field-q_yr_planet two-step-task-quiz">
+            <div class="form-check form-check-inline">
+                <label for="id_q_yr_planet_0" class="form-check-label">
+                    <input type="radio" name="q_yr_planet" value="blue" required="" id="id_q_yr_planet_0" class="form-check-input">
+                    <img src="{% static 'two_step_task/imgs/rocket2-a.png' %}" width="30%">
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label for="id_q_yr_planet_1" class="form-check-label">
+                    <input type="radio" name="q_yr_planet" value="red" required="" id="id_q_yr_planet_1" class="form-check-input">
+                    <img src="{% static 'two_step_task/imgs/rocket1-a.png' %}" width="30%">
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group required">
+        <label class="col-form-label" for="id_q_gb_planet_0">
+            Which spaceship travelled to the green-blue planet most of the time? (select by clicking)
+        </label>
+        <div class="controls  field-q_gb_planet two-step-task-quiz">
+            <div class="form-check form-check-inline">
+                <label for="id_q_gb_planet_0" class="form-check-label">
+                    <input type="radio" name="q_gb_planet" value="blue" required="" id="id_q_gb_planet_0" class="form-check-input">
+                    <img src="{% static 'two_step_task/imgs/rocket2-a.png' %}" width="30%">
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label for="id_q_gb_planet_1" class="form-check-label">
+                    <input type="radio" name="q_gb_planet" value="red" required="" id="id_q_gb_planet_1" class="form-check-input">
+                    <img src="{% static 'two_step_task/imgs/rocket1-a.png' %}" width="30%">
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        This is a pilot run of the task. We would appreciate any feedback you have for us on the next slide.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}
+
+{% block styles %}
+
+    <style>
+        body {
+            background-image: url("{% static 'two_step_task/imgs/space.jpg' %}");
+            color: #fff;
+        }
+
+        .two-step-task-quiz {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-check-inline {
+            margin-right: 0
+        }
+
+        [type=radio] {
+            position: absolute!important;
+            opacity: 0;
+            width: 0;
+            height: 0;
+            bottom: 0;
+            left: 50%;
+        }
+
+        /* IMAGE STYLES */
+        [type=radio] + img {
+            cursor: pointer;
+            display: block;
+            margin: auto;
+        }
+
+        /* CHECKED STYLES */
+        [type=radio]:checked + img {
+            outline: 0.5rem solid #5B9BD5;
+        }
+
+
+    </style>
+{% endblock %}
+
+

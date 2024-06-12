@@ -1,0 +1,32 @@
+.otree-body {
+    max-width 60%;
+    font-size 3vmin;
+}
+.page-header {
+    margin 0;
+    padding-top 5vh
+}
+
+.comment-container {
+    background-color #ffffff;
+    margin-bottom 5vh;
+    padding 2vmin;
+}
+.comment-container .form-group {
+    margin-bottom 2vh;
+}
+.comment-container textarea.form-control {
+    padding 1vh 2vh;
+    border 0.2vmin solid #ced4da;
+    border-radius 0.5vmin;
+    max-width 100%;
+}
+.comment-container textarea {
+    height 24vh;
+    width 100%;
+}
+.comment-container .col-form-label {
+    color #000000;
+    padding-top 1vh;
+    padding-bottom 1vh;
+}
