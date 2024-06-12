@@ -1,0 +1,51 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            let radios = $('[type=radio]'),
+                feedback = {{ feedback|json }};
+            radios.each(function () {
+                if (feedback) {
+                    $(this).prop('tabIndex', -1);
+                    if (!$(this).is(':checked') && feedback) {
+                        $(this).prop('disabled', true);
+                    }
+                }
+            });
+
+            $('.otree-btn-next').on('click', function (e) {
+                // Prevent default form validation
+                e.preventDefault();
+
+                if ($('[type=radio]:checked').length < 1) {
+                    // If num select < num questions
+                    $('#quiz-modal').modal('show');
+                } else {
+                    $('#form').submit();
+                }
+            })
+        })
+    </script>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    {% include 'includes/quiz_modal.html' %}
+
+    <img class="zpg-quiz-img" src="{% static img %}" style="max-width: 100%; margin-bottom: 1rem">
+
+    {% formfields %}
+
+    {% if feedback %}
+        <p class="mb-4">{{ feedback }}</p>
+    {% endif %}
+ <p>
+        <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+    </p>
+
+{% endblock %}

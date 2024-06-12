@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree customtags %}
+
+{% block styles %}
+    <link href="{% static 'global/css/dictator_trust.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        Welcome! <br/>
+        Thank you for your interest in our study! <br/>
+        This session consists of four different tasks that will take approximately 50-60 minutes.
+        In some of the tasks you can earn bonus payments, which will be explained in the task-specific instructions.
+    </p>
+    <p>
+        The time window to begin this part will close at 2 PM today. You have time until xx to finish this experiment
+    </p>
+    <br><br><br><br><br>
+    <p>
+        Press CONTINUE.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}

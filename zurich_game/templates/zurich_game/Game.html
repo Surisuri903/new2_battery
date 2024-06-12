@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href="{% static 'game/css/zurich_prosocial_game.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div id="zurich-prosocial-game">
+        {% include 'includes/game_canvas.html' %}
+        {% include 'includes/game_side_panel.html' %}
+        {% include 'includes/timeout_modal.html' %}
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'otree/js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'game/js/zurich_prosocial_game.js' %}"></script>
+{% endblock %}

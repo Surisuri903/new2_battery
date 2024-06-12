@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Game {{ game_to_pay }} was drawn, which corresponds to a bonus of {{ participant.vars.zpg_payoff }}.
+    </p>
+    <p>
+        Thank you again for your participation. In case this task is chosen by the bonus lottery, this is the amount you will receive as bonus for this task.
+    </p>
+    <p>
+         Click CONTINUE to proceed to the next task.
+    </p>
+ <p>
+        <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+    </p>
+
+{% endblock %}
+

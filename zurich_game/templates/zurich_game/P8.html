@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Thank you for answering the questions.
+    </p>
+    <p>
+        When you are ready, press continue to play the games for real.
+    </p>
+    <p>
+        You will play 12 rounds of the game, which will be presented consecutively.
+        <b>In each game, you will be paired with a different player. </b>
+        The matching happens in the background, such that, in most cases, you will be able to continue with the next game immediately.
+    </p>
+    <p>
+        After the last game, one of the rounds will be randomly drawn and in case you had reached
+        your treasure in this round, you will receive {{ Constants.bonus_for_treasure }} as a bonus.
+    </p>
+    <p>
+        Press CONTINUE to start.
+    </p> <p>
+        <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+    </p>
+
+{% endblock %}

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="56.568668mm"
+   height="34.014885mm"
+   viewBox="0 0 200.44017 120.52518"
+   id="svg6350"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="arrow.svg">
+  <defs
+     id="defs6352">
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter4842">
+      <feFlood
+         flood-opacity="0.823529"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood4844" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite4846" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="0.9"
+         result="blur"
+         id="feGaussianBlur4848" />
+      <feOffset
+         dx="1.9"
+         dy="1.9"
+         result="offset"
+         id="feOffset4850" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite4852" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter4412">
+      <feFlood
+         flood-opacity="0.823529"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood4414" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite4416" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="2"
+         result="blur"
+         id="feGaussianBlur4418" />
+      <feOffset
+         dx="5"
+         dy="5"
+         result="offset"
+         id="feOffset4420" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite4422" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter4270">
+      <feFlood
+         flood-opacity="0.823529"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood4272" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite4274" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="2"
+         result="blur"
+         id="feGaussianBlur4276" />
+      <feOffset
+         dx="8"
+         dy="8"
+         result="offset"
+         id="feOffset4278" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite4280" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="5.5184481"
+     inkscape:cy="18.733539"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4178"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="2194"
+     inkscape:window-height="1171"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata6355">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-211.6876,-88.311719)">
+    <g
+       id="g5009"
+       transform="matrix(3.6841705,0,0,3.6841705,-961.54518,-1822.5517)">
+      <g
+         transform="matrix(0.271429,0,0,0.28228441,270.19014,445.88687)"
+         id="g5763"
+         style="stroke:none">
+        <rect
+           y="415.00253"
+           x="193.74271"
+           height="106.772"
+           width="211.48599"
+           id="rect5739"
+           style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      </g>
+      <g
+         id="g4178"
+         style="stroke:#000000;stroke-width:0.27143151;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+        <path
+           style="opacity:1;fill:#ff7f00;fill-opacity:1;stroke:#000000;stroke-width:3.04748325;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter4270)"
+           d="m -89.107422,-168.85547 0,30.02735 -112.580078,0 0,39.947261 112.580078,0 0,30.02539 60.53711,-50.000001 -60.53711,-50 z"
+           transform="matrix(0.26189282,0,0,0.27261944,375.80668,567.42804)"
+           id="rect4147"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Great, now you know how to move your player and how to open doors.
+    </p>
+    <p>
+        During the real games, there will be another independent player on the field.
+        This player will also try to reach a treasure. You both pursue independent treasures,
+        and you can both win a treasure in each round. When a player gets stuck behind a door,
+        the other player has the option to open the door using one of their own keys.
+    </p>
+    <p>
+        Three more rules to be aware of:
+    </p>
+    <ul>
+        <li>
+            If a player hasn't picked a path after 10 seconds, they will get assigned to a path and the round starts automatically.
+        </li>
+        <li>
+            When a player has died, they can still use their keys to open doors for the other player.
+        </li>
+        <li>
+            But once a player has reached their treasure, they cannot use their remaining keys anymore
+            to open a door for the other player.
+        </li>
+    </ul>
+
+    <p>
+        To try how the game works with a second player on the field,
+        you can play four more practice rounds of the game now. Each game takes about a minute.
+    </p>
+    <p>
+        Click CONTINUE to play the practice rounds.
+    </p>
+
+     <p>
+        <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+    </p>
+
+{% endblock %}

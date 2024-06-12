@@ -1,0 +1,31 @@
+body {
+    font-size: 3vmin;
+}
+.instr-1 {
+    display: block;
+    width: 60%;
+    margin: auto;
+}
+.instr-2 {
+    display: block;
+    width: 60%;
+    margin-left: 40px;
+}
+
+.text-green {
+    color: #00B050;
+}
+
+.feedback-correct {
+    margin-bottom: 5px;
+    color: #228b22;
+}
+
+.feedback-wrong {
+    margin-bottom: 5px;
+    color: #b94a48;
+}
+
+input[type=radio]:disabled {
+    opacity: 1;
+}

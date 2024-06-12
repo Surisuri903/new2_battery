@@ -1,0 +1,48 @@
+{% extends "global/Page.html" %}
+{% load otree customtags %}
+
+{% block styles %}
+    <link href="{% static 'trust/css/dictator_trust.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+Interactive task 1
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid mb-5">
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="text-center">You receive £{{ Constants.endowment|floatformat }} at the start.</div>
+                <img class="instr-1" src="{% static 'trust/imgs/sender.png' %}">
+            </div>
+            <div class="col">
+                <div class="text-center">The other player has zero.</div>
+                <img class="instr-1" src="{% static 'trust/imgs/receiver.png' %}">
+            </div>
+        </div>
+    </div>
+
+    <p>
+        You can send any amount from £0 to £{{ Constants.endowment|floatformat }} to the other player.
+        The amount you send will be multiplied by {{ Constants.multiplier }}.
+    </p>
+    <p>
+        Once the other player receives the tripled amount, they can decide to send none, some or all of it back.
+    </p>
+    <br>
+    <p>
+        <i>
+            The other player knows that you have £{{ Constants.endowment|floatformat }}
+            and that the amount they receive is the triple of what you sent.
+        </i>
+    </p>
+    <br>
+    <p>
+        Click CONTINUE.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}

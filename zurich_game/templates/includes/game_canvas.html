@@ -1,0 +1,40 @@
+{% load otree static %}
+
+<div id="canvas-container">
+
+    <div class="emoji-container emoji-container-ego" data-player="ego">
+        <div class="emoji">
+            <div class="eyes"></div>
+            <div class="eyes"></div>
+            <div class="mouth"></div>
+        </div>
+    </div>
+
+    {% if not game.is_solo_game %}
+        <div class="emoji-container" data-player="alter">
+            <div class="emoji">
+                <div class="eyes"></div>
+                <div class="eyes"></div>
+                <div class="mouth"></div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="arrow-container arrow-ego"><img src="{% static 'game/imgs/arrow.svg' %}"></div>
+    <div class="arrow-container arrow-ego"><img src="{% static 'game/imgs/arrow.svg' %}"></div>
+
+    {% if game.alter_position == 0 and not game.is_solo_game %}
+        <div class="arrow-container arrow-alter"><img src="{% static 'game/imgs/arrow.svg' %}"></div>
+        <div class="arrow-container arrow-alter"><img src="{% static 'game/imgs/arrow.svg' %}"></div>
+    {% endif %}
+
+    <canvas id="canvas-zurich-prosocial-game" class="canvas-zurich-prosocial-game"></canvas>
+    <canvas id="canvas-grid" class="canvas-zurich-prosocial-game"></canvas>
+
+    <div id="audio-container">
+        {% for sound in game.sounds %}
+            <audio id="{{ sound }}" src="{% static 'game/media/' %}{{ sound }}.mp3">Audio not supported...</audio>
+        {% endfor %}
+    </div>
+
+</div>

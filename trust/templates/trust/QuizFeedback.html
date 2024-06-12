@@ -1,0 +1,46 @@
+{% extends "global/Page.html" %}
+{% load otree customtags %}
+
+{% block styles %}
+    <link href="{% static 'global/css/dictator_trust.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            $('input:not(:checked)').prop('disabled', true)
+        })
+    </script>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To make sure you understood the game, please answer the following two questions:
+    </p>
+
+    {% formfield player.q1 %}
+    {% if player.q1 == Constants.q1_correct %}
+        <div class="feedback-correct">Correct.</div>
+    {% else %}
+        <div class="feedback-wrong">{{ Constants.q1_wrong }}</div>
+    {% endif %}
+
+    {% formfield player.q2 %}
+    {% if player.q2 == Constants.q2_correct %}
+        <div class="feedback-correct">Correct.</div>
+    {% else %}
+        <div class="feedback-wrong">{{ Constants.q2_wrong }}</div>
+    {% endif %}
+
+    <p>
+        Click CONTINUE to play. You will only play this game once.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}
+

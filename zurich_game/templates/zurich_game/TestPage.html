@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href="{% static 'game/css/zurich_prosocial_game.css' %}" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div style="position: absolute; top: 300px; left: 300px">
+        <div style="position: relative">
+            <div class="emoji-container" data-player="ego">
+                <div class="emoji">
+                    <div class="eyes"></div>
+                    <div class="eyes"></div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('.emoji-container').on('click', function () {
+                $(this).toggleClass('emoji-dead');
+            })
+        })
+    </script>
+
+
+
+{% endblock %}

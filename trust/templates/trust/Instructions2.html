@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load otree customtags %}
+
+{% block styles %}
+    <link href="{% static 'trust/css/dictator_trust.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+Interactive task 1
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <b>Your final payoff</b> in this game depends
+        on <b>how much you send and how much the other player returns</b>.
+    </p>
+    <div>
+        For example, if you send £{{ half_endowment }}, the other receives
+        £{{ tripled }}. The
+        other player can decide whether to send back any amount (£0 - £{{ tripled }}) in return.
+    </div>
+
+    <img class="instr-2" src="{% static 'trust/imgs/instr_2a.png' %}" width="100%" style="margin: 2rem auto 2rem auto">
+    <img class="instr-2" src="{% static 'trust/imgs/instr_2b.png' %}" width="100%" style="margin: 2rem auto 2rem auto">
+
+    <p>
+        Click CONTINUE.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}

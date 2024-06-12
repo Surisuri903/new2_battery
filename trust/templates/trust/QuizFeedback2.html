@@ -1,0 +1,35 @@
+{% extends "global/Page.html" %}
+{% load otree customtags %}
+
+{% block styles %}
+    <link href="{% static 'trust/css/dictator_trust.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            $('input:not(:checked)').prop('disabled', true)
+        })
+    </script>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.q2 %}
+    {% if player.q2 == Constants.q2_correct %}
+        <div class="feedback-correct">Correct.</div>
+    {% else %}
+        <div class="feedback-wrong">{{ Constants.q2_wrong }}</div>
+    {% endif %}
+
+    <p>
+        Click CONTINUE to access the next question.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}
+

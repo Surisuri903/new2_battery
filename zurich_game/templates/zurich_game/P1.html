@@ -1,0 +1,84 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Interactive task 4
+{% endblock %}
+
+{% block content %}
+
+    <p class="text-center"><b>The Treasure Game</b></p>
+
+    <p><b>Goal of the game</b></p>
+
+    <p>
+        You will now play a game in which you have to move a <b>yellow player (YOU)</b> to a
+        treasure using the <b>mouse</b>. A treasure is worth {{ Constants.bonus_for_treasure }}.
+    </p>
+    <p>
+        You will play multiple rounds of the game and <b>in each round</b>, you will be randomly and anonymously
+        connected to <b>another player</b>. This player will also try to reach a treasure on the same field.
+        You both pursue independent treasures, and you can both win a treasure in each round.
+    </p>
+    <p>
+        At the end, one of the rounds will be randomly drawn and in case you had reached
+        your treasure in this round, you will receive {{ Constants.bonus_for_treasure }} as a bonus.
+    </p>
+    <p><b>How to play</b></p>
+
+    <p>
+        You must first choose one of two paths. Randomly falling <b>red and blue doors</b> on the paths
+        <b>can stop you</b> from moving towards the treasure. A total of <b>six doors</b> fall randomly on the
+        paths chosen by you and the other player, as well as on the paths not chosen.
+        You can open these doors with <b>keys</b> at your disposal. You need red keys for red doors and blue
+        keys for blue doors. In the right part of the display you can see the doors still to come and
+        the keys available to you and the other player.
+    </p>
+    <p>
+        This is an Example of the playing field:
+    </p>
+    <img src="{% static 'game/imgs/zpg_example_playing_field.png' %}" style="display: block; margin: auto; max-width: 100%">
+
+    <p class="mt-5">
+        Some rules to know:
+    </p>
+    <ul>
+        <li>
+            You only have 60 seconds to reach the treasure.
+            The time starts running when you choose one of the paths.
+            The remaining time is shown on the game display.
+        </li>
+        <li>
+            Each key can only be used once.
+        </li>
+        <li>
+            If a door has not been opened, the player behind it will die after 7 seconds,
+            losing the possibility of obtaining the treasure.
+        </li>
+    </ul>
+
+    <p>
+        Let’s start easy. First, you can practice the game on your own without another player.
+        You get to play two games. In each game
+    </p>
+    <ul>
+        <li>
+            Choose a path for your character. Use the mouse to make your choice.
+        </li>
+        <li>
+            Time starts running once you have made your choice.
+        </li>
+        <li>
+            Use the mouse to move along the path and to select keys from the right-hand panel.
+        </li>
+    </ul>
+
+    <p>
+        Click CONTINUE to try out how the game works.
+    </p>
+
+    <p>
+        <button class="otree-btn-next btn btn-primary">CONTINUE</button>
+    </p>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% load otree static %}
+
+<div id="zurich-prosocial-game-side-panel">
+    <fieldset id="time" class="rect">
+        <legend>Time left</legend>
+        <div id="timer"><span id="sec-left">{{ player.time_left }}</span> <span>sec</span></div>
+    </fieldset>
+
+    <fieldset id="doors" class="rect">
+        <legend>Doors</legend>
+        {% for row in doors_rows %}
+            <div class="doors-holder">
+                {% for d in row %}
+                    <div>
+                        <div id="{{ d.id }}" class="door{% if d.fallen %} hidden{% endif %}"
+                             data-door-color="{{ d.color }}" data-player-path="{{ d.player }}"
+                             data-active="{{ d.active }}">
+                            <img src="{% static 'game/imgs/' %}door_{{ d.color }}.svg">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </fieldset>
+
+    <fieldset id="ego-keys" class="rect">
+        <legend>You</legend>
+        <div class="key-holder">
+            {% for k in game_status.keys.ego %}
+                <div>
+                    {% if k %}
+                        <div class="{{ k }}"><img src="{% static 'game/imgs/' %}key_{{ k }}.svg"></div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </fieldset>
+
+    <fieldset id="alter-keys" class="rect">
+        <legend>Other</legend>
+        <div class="key-holder">
+            {% for k in game_status.keys.alter %}
+                <div>
+                    {% if k %}
+                        <div class="{{ k }}"><img src="{% static 'game/imgs/' %}key_{{ k }}.svg"></div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </fieldset>
+
+    <fieldset id="round" class="rect">
+        <legend>Round</legend>
+        <div id="round-num">{{ curr_round }}/{{ num_rounds }}</div>
+    </fieldset>
+</div>

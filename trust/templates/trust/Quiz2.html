@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree customtags %}
+
+{% block styles %}
+    <link href="{% static 'trust/css/dictator_trust.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To make sure you understood the game, please answer the second question:
+    </p>
+
+    {% formfields %}
+
+
+    <p>
+        Click CONTINUE to play. You will only play this game once.
+    </p>
+
+    {% continue_button %}
+
+{% endblock %}
